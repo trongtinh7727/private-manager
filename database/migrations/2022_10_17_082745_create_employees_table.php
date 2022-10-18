@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('address');
             $table->date('birthday');
             $table->string('store', 30);
+            $table->date('updated_at');
+            $table->date('created_at');
         });
     }
 
