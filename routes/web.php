@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\NhanVienController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+//Nhan vien
+Route::get('/', [EmployeeController::class, 'index'])->name('index');
+Route::get('/create', [EmployeeController::class, 'create'])->name('create');
+Route::post('/create', [EmployeeController::class, 'store'])->name('store');
