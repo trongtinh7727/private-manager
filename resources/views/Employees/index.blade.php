@@ -28,7 +28,7 @@
                                     <h4 class="card-title">Nhân viên</h4>
                                     <div class="toolbar">
                                         <!--        Here you can write extra buttons/actions for the toolbar              -->
-                                        <a href="{{ route('create') }}"> <button class="btn btn-success">
+                                        <a href="{{ route('employee.create') }}"> <button class="btn btn-success">
                                                 <span class="btn-label">
                                                     <i class="material-icons">add</i>
                                                 </span>

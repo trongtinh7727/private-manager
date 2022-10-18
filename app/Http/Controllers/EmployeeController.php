@@ -35,16 +35,16 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreNhanVienRequest  $request
+     * @param  \App\Http\Requests\StoreEmployeeRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //
         dd($request->except(keys: ['_token', 'password_confirmation', 'finish']));
-        // $Nhanvien = new NhanVien();
-        // $Nhanvien->fill($request->all());
-        // $Nhanvien->save();
+        $Employee = new Employee();
+        $Employee->fill($request->all());
+        $Employee->save();
     }
     /**
      * Display the specified resource.

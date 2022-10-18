@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+// Route::get('/', [EmployeeController::class, 'index'])->name('index');
 
-//Nhan vien
-Route::get('/', [EmployeeController::class, 'index'])->name('index');
-Route::get('/create', [EmployeeController::class, 'create'])->name('create');
-Route::post('/create', [EmployeeController::class, 'store'])->name('store');
+Route::group(['prefix' => 'employees', 'as' => 'employee.'], function () {
+    Route::get('/', [EmployeeController::class, 'index']);
+    Route::get('/create', [EmployeeController::class, 'create'])->name('create');
+    Route::post('/create', [EmployeeController::class, 'store'])->name('store');
+});
