@@ -40,11 +40,12 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd($request->except(keys: ['_token', 'password_confirmation', 'finish']));
+
+        $keys =  ['_token', 'password_confirmation', 'finish'];
         $Employee = new Employee();
-        $Employee->fill($request->all());
+        $Employee->fill($request->except($keys));
         $Employee->save();
+        return redirect()->route('employee.index');
     }
     /**
      * Display the specified resource.
@@ -63,9 +64,13 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit($employee)
     {
-        //
+        $user = Employee::query()->where('email', $employee)->first();
+
+        return view('Employees.modal.edit', [
+            'employee' => $user,
+        ]);
     }
 
     /**
@@ -75,9 +80,11 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request,  $employee)
     {
-        //
+        $keys =  ['_token', '_method'];
+        $user = Employee::query()->where('email', $employee)->update($request->except($keys));
+        return redirect(route('employee.index'));
     }
 
     /**
@@ -86,8 +93,9 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy($employee)
     {
-        //
+        Employee::query()->where('email', $employee)->delete();
+        return redirect(route('employee.index'));
     }
 }

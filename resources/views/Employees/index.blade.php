@@ -57,17 +57,27 @@
                                             <tbody>
                                                 @foreach ($employees as $employee)
                                                     <tr>
-                                                        <td>{{ $employee->ho_ten }}</td>
-                                                        <td>{{ $employee->ngay_sinh }}</td>
-                                                        <td>{{ $employee->ma_cua_hang }}</td>
+                                                        <td>{{ $employee->name }}</td>
+                                                        <td>{{ $employee->birthday }}</td>
+                                                        <td>{{ $employee->store }}</td>
                                                         <td class="text-right">
-                                                            <a href="#"
-                                                                class="btn btn-simple btn-warning btn-icon edit"><i
-                                                                    class="material-icons">dvr</i></a>
-                                                            <a href="#"
-                                                                class="btn btn-simple btn-danger btn-icon remove"><i
-                                                                    class="material-icons">close</i></a>
+                                                            <a href="#" data-toggle="modal"
+                                                                data-target="#ModalEdit"
+                                                                class="btn btn-simple btn-warning btn-icon edit">
+                                                                <i class="material-icons">dvr</i>
+                                                            </a>
+                                                            <form style="display: inline"
+                                                                action="{{ route('employee.destroy', ['employee' => $employee->email]) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button href=""
+                                                                    class="btn btn-simple btn-danger btn-icon remove">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                            </form>
                                                         </td>
+                                                        @include('Employees.modal.edit')
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -89,6 +99,28 @@
 </body>
 @include('footer')
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('.datetimepicker').datetimepicker({
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove'
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        demo.initMaterialWizard();
+        setTimeout(function() {
+            $('.card.wizard-card').addClass('active');
+        }, 600);
+    });
     $(document).ready(function() {
         $('#datatables').DataTable({
             "pagingType": "full_numbers",
@@ -121,28 +153,12 @@
             }
 
         });
-
-
         var table = $('#datatables').DataTable();
-
-        // Edit record
-        table.on('click', '.edit', function() {
-            $tr = $(this).closest('tr');
-
-            var data = table.row($tr).data();
-            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-        });
-
-        // Delete a record
-        table.on('click', '.remove', function(e) {
-            $tr = $(this).closest('tr');
-            table.row($tr).remove().draw();
-            e.preventDefault();
-        });
-
         //Like record
-        table.on('click', '.like', function() {
-            alert('You clicked on Like button');
+
+        table.on('click', '.remove', function(e) {
+            alter('aaaaa');
+
         });
 
         $('.card .material-datatables label').addClass('form-group');

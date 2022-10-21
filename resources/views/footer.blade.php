@@ -17,6 +17,7 @@
 <!--  Notifications Plugin, full documentation here: http://bootstrap-notify.remabledesigns.com/    -->
 <script src="../../assets/js/bootstrap-notify.js"></script>
 <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+<script src="../../assets/js/moment.min.js"></script>
 <script src="../../assets/js/bootstrap-datetimepicker.js"></script>
 <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
 <script src="../../assets/js/jquery-jvectormap.js"></script>

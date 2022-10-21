@@ -50,7 +50,7 @@
                 </a>
             </li>
             <li class="active">
-                <a href="/nhanvien">
+                <a href="{{ route('employee.index') }}">
                     <i class="material-icons">badge</i>
                     <p> Nhân viên </p>
                 </a>

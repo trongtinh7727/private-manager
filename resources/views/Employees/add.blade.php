@@ -20,7 +20,7 @@
                 <div class="container-fluid">
                     <div class="wizard-container">
                         <div class="card wizard-card active" data-color="rose" id="wizardProfile">
-                            <form action="{{ route('store') }}" method="POST" novalidate="novalidate">
+                            <form action="{{ route('employee.store') }}" method="POST" novalidate="novalidate">
                                 @csrf
                                 <!--        You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
                                 <div class="wizard-header">
@@ -57,31 +57,20 @@
                                                         <label class="control-label">Full Name
                                                             <small>(required)</small>
                                                         </label>
-                                                        <input name="firstname" type="text" class="form-control">
+                                                        <input name="name" type="text" class="form-control"
+                                                            required="true" aria-required="true">
                                                         <span class="material-input"></span>
                                                     </div>
                                                 </div>
-                                                {{-- <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">record_voice_over</i>
-                                                    </span>
-                                                    <div class="form-group label-floating is-empty">
-                                                        <label class="control-label">Last Name
-                                                            <small>(required > 3 letter)</small>
-                                                        </label>
-                                                        <input name="lastname" type="text" class="form-control">
-                                                        <span class="material-input"></span>
-                                                    </div>
-                                                </div> --}}
                                                 <div class="input-group">
+
                                                     <span class="input-group-addon">
                                                         <i class="material-icons">today</i>
                                                     </span>
-                                                    <div class="form-group label-floating is-empty">
-                                                        <label class="control-label">Birthday: 10/05/2016..
-                                                        </label>
-                                                        <input type="text" class="form-control" name="birthday" />
-                                                        <span class="material-input"></span>
+                                                    <div class="form-group">
+                                                        <label class="label-control">Datetime Picker</label>
+                                                        <input type="text" class="form-control datetimepicker"
+                                                            name="birthday" value="10/05/2016" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -127,7 +116,6 @@
                                                         <span class="material-input"></span>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -183,6 +171,20 @@
 </body>
 @include('footer')
 <script type="text/javascript">
+    $('.datetimepicker').datetimepicker({
+        icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-chevron-up",
+            down: "fa fa-chevron-down",
+            previous: 'fa fa-chevron-left',
+            next: 'fa fa-chevron-right',
+            today: 'fa fa-screenshot',
+            clear: 'fa fa-trash',
+            close: 'fa fa-remove'
+        }
+    });
+
     $(document).ready(function() {
         demo.initMaterialWizard();
         setTimeout(function() {
