@@ -13,7 +13,7 @@
             <div class="info">
                 <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                     <span>
-                        Tania Andrew
+                        User name
                         <b class="caret"></b>
                     </span>
                 </a>
@@ -49,10 +49,16 @@
                     <p> Dashboard </p>
                 </a>
             </li>
-            <li class="active">
+            <li class="">
                 <a href="{{ route('employee.index') }}">
                     <i class="material-icons">badge</i>
                     <p> Nhân viên </p>
+                </a>
+            </li>
+            <li class="active">
+                <a href="{{ route('store.index') }}">
+                    <i class="material-icons">store</i>
+                    <p> Cửa Hàng</p>
                 </a>
             </li>
         </ul>
