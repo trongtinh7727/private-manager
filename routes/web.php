@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MachineController;
 use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\StoreController;
+use App\Models\machine;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,4 +38,13 @@ Route::group(['prefix' => 'stores', 'as' => 'store.'], function () {
     Route::delete('/destroy/{store}', [StoreController::class, 'destroy'])->name('destroy');
     Route::get('/edit/{store}', [StoreController::class, 'edit'])->name('edit');
     Route::put('/update/{store}', [StoreController::class, 'update'])->name('update');
+});
+
+Route::group(['prefix' => 'machines', 'as' => 'machine.'], function () {
+    Route::get('/', [MachineController::class, 'index'])->name('index');
+    Route::get('/create', [MachineController::class, 'create'])->name('create');
+    Route::post('/create', [MachineController::class, 'store'])->name('store');
+    Route::delete('/destroy/{machine}', [MachineController::class, 'destroy'])->name('destroy');
+    Route::get('/edit/{machine}', [MachineController::class, 'edit'])->name('edit');
+    Route::put('/update/{machine}', [MachineController::class, 'update'])->name('update');
 });

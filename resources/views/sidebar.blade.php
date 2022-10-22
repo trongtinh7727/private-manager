@@ -61,6 +61,12 @@
                     <p> Cửa Hàng</p>
                 </a>
             </li>
+            <li class="active">
+                <a href="{{ route('machine.index') }}">
+                    <i class="material-icons">sports</i>
+                    <p> Máy game</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
