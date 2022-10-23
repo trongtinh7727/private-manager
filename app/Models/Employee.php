@@ -14,6 +14,7 @@ class Employee extends Model
         'birthday',
         'password',
         'address',
+        'level',
         'store'
     ];
 }

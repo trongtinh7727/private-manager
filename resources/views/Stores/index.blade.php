@@ -101,6 +101,7 @@
 </body>
 @include('footer')
 <script type="text/javascript">
+    document.getElementById("store").classList.add("active");
     $(document).ready(function() {
         $('.datetimepicker').datetimepicker({
             icons: {

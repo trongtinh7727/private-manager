@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Employee\StoreRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,11 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function login()
+    {
+        return view('login');
+    }
     public function index()
     {
 
@@ -38,13 +44,11 @@ class EmployeeController extends Controller
      * @param  \App\Http\Requests\StoreEmployeeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
 
         $keys =  ['_token', 'password_confirmation', 'finish'];
-        $Employee = new Employee();
-        $Employee->fill($request->except($keys));
-        $Employee->save();
+        Employee::create($request->except($keys));
         return redirect()->route('employee.index');
     }
     /**

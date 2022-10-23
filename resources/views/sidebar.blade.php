@@ -44,24 +44,24 @@
         </div>
         <ul class="nav">
             <li>
-                <a href="#">
+                <a href="#" class="" id="Dashboard">
                     <i class="material-icons">dashboard</i>
                     <p> Dashboard </p>
                 </a>
             </li>
-            <li class="">
+            <li class="" id="employee">
                 <a href="{{ route('employee.index') }}">
                     <i class="material-icons">badge</i>
                     <p> Nhân viên </p>
                 </a>
             </li>
-            <li class="active">
+            <li class="" id="store">
                 <a href="{{ route('store.index') }}">
                     <i class="material-icons">store</i>
                     <p> Cửa Hàng</p>
                 </a>
             </li>
-            <li class="active">
+            <li class="" id="machine">
                 <a href="{{ route('machine.index') }}">
                     <i class="material-icons">sports</i>
                     <p> Máy game</p>

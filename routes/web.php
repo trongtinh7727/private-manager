@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [EmployeeController::class, 'index'])->name('index');
+Route::get('/login', [EmployeeController::class, 'login'])->name('login');
 
 Route::group(['prefix' => 'employees', 'as' => 'employee.'], function () {
     Route::get('/', [EmployeeController::class, 'index'])->name('index');

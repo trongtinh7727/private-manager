@@ -1157,17 +1157,13 @@ demo = {
         });
     },
 
-    showNotification: function(from, align) {
-        type = ['', 'info', 'success', 'warning', 'danger', 'rose', 'primary'];
-
-        color = Math.floor((Math.random() * 6) + 1);
-
+    showNotification: function(from, align,message,type) {
         $.notify({
             icon: "notifications",
-            message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
+            message: message
 
         }, {
-            type: type[color],
+            type: type,
             timer: 3000,
             placement: {
                 from: from,

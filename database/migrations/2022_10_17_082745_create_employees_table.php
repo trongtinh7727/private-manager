@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('address');
             $table->date('birthday');
+            $table->integer('level');
             $table->string('store', 30);
             $table->date('updated_at');
             $table->date('created_at');

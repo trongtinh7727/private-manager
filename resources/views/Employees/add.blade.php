@@ -54,11 +54,11 @@
                                                         <i class="material-icons">face</i>
                                                     </span>
                                                     <div class="form-group label-floating is-empty">
-                                                        <label class="control-label">Full Name
-                                                            <small>(required)</small>
-                                                        </label>
+                                                        <strong>{{ __('Full Name') }}:</strong>
+
                                                         <input name="name" type="text" class="form-control"
-                                                            required="true" aria-required="true">
+                                                            required="true" aria-required="true"
+                                                            value="{{ old('name') }}">
                                                         <span class="material-input"></span>
                                                     </div>
                                                 </div>
@@ -68,9 +68,9 @@
                                                         <i class="material-icons">today</i>
                                                     </span>
                                                     <div class="form-group">
-                                                        <label class="label-control">Datetime Picker</label>
+                                                        <strong>{{ __('BirthDay') }}:</strong>
                                                         <input type="text" class="form-control datetimepicker"
-                                                            name="birthday" value="10/05/2016" />
+                                                            name="birthday" value="{{ old('birthday') }}" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -82,21 +82,16 @@
                                             <div class="col-lg-10 col-lg-offset-1">
                                                 <div class="col-sm-6">
                                                     <div class="form-group label-floating is-empty">
-                                                        <label class="control-label">
-                                                            Email Address
-                                                            <small>*</small>
-                                                        </label>
+                                                        <strong>{{ __('Email Address') }}:</strong>
                                                         <input class="form-control" name="email" type="email"
-                                                            required="true" aria-required="true">
+                                                            required="true" aria-required="true"
+                                                            value="{{ old('email') }}">
                                                         <span class="material-input"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group label-floating is-empty">
-                                                        <label class="control-label">
-                                                            Password
-                                                            <small>*</small>
-                                                        </label>
+                                                        <strong>{{ __('Password') }}:</strong>
                                                         <input class="form-control" name="password"
                                                             id="registerPassword" type="password" required="true"
                                                             aria-required="true">
@@ -105,10 +100,7 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group label-floating is-empty">
-                                                        <label class="control-label">
-                                                            Confirm Password
-                                                            <small>*</small>
-                                                        </label>
+                                                        <strong>{{ __('Confirm Password') }}:</strong>
                                                         <input class="form-control" name="password_confirmation"
                                                             id="registerPasswordConfirmation" type="password"
                                                             required="true" equalto="#registerPassword"
@@ -123,20 +115,18 @@
                                         <div class="row">
                                             <div class="col-sm-7 col-sm-offset-1">
                                                 <div class="form-group label-floating is-empty">
-                                                    <label class="control-label">Địa chỉ: số 123, Võ Thị
-                                                        Sáu,....</label>
-                                                    <input type="text" class="form-control" name="address">
+                                                    <strong>{{ __('Address') }}:</strong>
+                                                    <input type="text" class="form-control" name="address"
+                                                        value="{{ old('address') }}">
                                                     <span class="material-input"></span>
                                                 </div>
                                             </div>
                                             <div class="col-sm-7 col-sm-offset-1">
                                                 <div class="form-group label-floating is-empty">
-                                                    <label class="control-label">
-                                                        Cửa hàng
-                                                        <small>*</small>
-                                                    </label>
+                                                    <strong>{{ __('Store') }}:</strong>
                                                     <input class="form-control" name="store" id="store"
-                                                        type="text" required="true" aria-required="true">
+                                                        type="text" required="true" aria-required="true"
+                                                        value="{{ old('store') }}">
                                                     <span class="material-input"></span>
                                                 </div>
                                             </div>
@@ -171,6 +161,12 @@
 </body>
 @include('footer')
 <script type="text/javascript">
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            demo.showNotification('top', 'center', '{{ $error }}', 'danger');
+        @endforeach
+    @endif
+
     $('.datetimepicker').datetimepicker({
         icons: {
             time: "fa fa-clock-o",
