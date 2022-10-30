@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MachineController;
 use App\Http\Controllers\NhanVienController;
@@ -48,4 +49,15 @@ Route::group(['prefix' => 'machines', 'as' => 'machine.'], function () {
     Route::delete('/destroy/{machine}', [MachineController::class, 'destroy'])->name('destroy');
     Route::get('/edit/{machine}', [MachineController::class, 'edit'])->name('edit');
     Route::put('/update/{machine}', [MachineController::class, 'update'])->name('update');
+});
+
+Route::group(['prefix' => 'details', 'as' => 'detail.'], function () {
+    Route::get('/', [DetailController::class, 'index'])->name('index');
+    Route::get('/create', [DetailController::class, 'create'])->name('create');
+    Route::post('/create', [DetailController::class, 'store'])->name('store');
+    // TODO: get Details
+    Route::post('/getdetails', [DetailController::class, 'getDetail'])->name('getdetails');
+    Route::delete('/destroy/{detail}', [DetailController::class, 'destroy'])->name('destroy');
+    Route::get('/edit/{detail}', [DetailController::class, 'edit'])->name('edit');
+    Route::put('/update/{detail}', [DetailController::class, 'update'])->name('update');
 });

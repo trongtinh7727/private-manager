@@ -1,10 +1,4 @@
 <div class="sidebar" data-active-color="rose" data-background-color="black" data-image="../../assets/img/sidebar-1.jpg">
-    <!--
-        Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
-        Tip 2: you can also add an image using data-image tag
-        Tip 3: you can change the color of the sidebar with data-background-color="white | black"
-    -->
-
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
@@ -65,6 +59,12 @@
                 <a href="{{ route('machine.index') }}">
                     <i class="material-icons">sports</i>
                     <p> Máy game</p>
+                </a>
+            </li>
+            <li class="" id="detail">
+                <a href="{{ route('detail.index') }}">
+                    <i class="material-icons">paid</i>
+                    <p>Thống kê</p>
                 </a>
             </li>
         </ul>

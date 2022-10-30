@@ -13,4 +13,14 @@ class machine extends Model
         'machine',
         'store'
     ];
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class, 'store');
+    }
+
+    public function details()
+    {
+        return $this->hasMany(detail::class, 'machine');
+    }
 }

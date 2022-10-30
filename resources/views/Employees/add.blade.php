@@ -108,6 +108,15 @@
                                                         <span class="material-input"></span>
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group label-floating is-empty">
+                                                        <strong>{{ __('Vai trò') }}:</strong>
+                                                        <input class="form-control" name="level" type="text"
+                                                            required="true" aria-required="true"
+                                                            value="{{ old('level') }}">
+                                                        <span class="material-input"></span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
