@@ -15,11 +15,11 @@ class Store extends Model
 
     public function machines()
     {
-        return $this->hasMany(machine::class, foreignKey: 'store');
+        return $this->hasMany(machine::class);
     }
 
     public function employees()
     {
-        return $this->hasMany(Employee::class, foreignKey: 'stores');
+        return $this->hasMany(Employee::class);
     }
 }

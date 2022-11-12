@@ -27,9 +27,7 @@
                         <span class="material-input"></span>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">today</i>
-                        </span>
+
                         <div class="form-group">
                             <strong>{{ __('Ngày Sinh') }}:</strong>
                             {!! Form::text('birthday', $employee->birthday, [

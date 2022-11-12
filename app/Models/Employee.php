@@ -17,4 +17,16 @@ class Employee extends Model
         'level',
         'store_id'
     ];
+
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class);
+    }
+
+    public function getStoreName()
+    {
+        $store = $this->store();
+        return $store->get('name')->first()['name'];
+    }
 }

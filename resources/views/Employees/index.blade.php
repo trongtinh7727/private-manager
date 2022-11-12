@@ -42,7 +42,7 @@
                                                 <tr>
                                                     <th>Họ Tên</th>
                                                     <th>Ngày sinh</th>
-                                                    <th>Mã CH</th>
+                                                    <th>Cửa hàng</th>
                                                     <th class="disabled-sorting text-right">Actions</th>
                                                 </tr>
                                             </thead>
@@ -50,7 +50,7 @@
                                                 <tr>
                                                     <th>Họ Tên</th>
                                                     <th>Ngày sinh</th>
-                                                    <th>Mã CH</th>
+                                                    <th>Cửa hàng</th>
                                                     <th class="disabled-sorting text-right">Actions</th>
                                                 </tr>
                                             </tfoot>
@@ -59,7 +59,7 @@
                                                     <tr>
                                                         <td>{{ $employee->name }}</td>
                                                         <td>{{ $employee->birthday }}</td>
-                                                        <td>{{ $employee->store_id }}</td>
+                                                        <td>{{ $employee->getStoreName() }}</td>
                                                         <td class="text-right">
                                                             <a href="#" data-toggle="modal"
                                                                 data-target="#ModalEdit"
