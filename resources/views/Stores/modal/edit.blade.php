@@ -8,24 +8,23 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('store.update', ['store' => $store->store]) }}" method="post"
-                    enctype="multipart/form-data">
+                <form action="{{ route('store.update', $store) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="input-group">
+                    {{-- <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">code</i>
                         </span>
                         <div class="form-group">
                             <strong>{{ __('Mã cửa hàng') }}:</strong>
-                            {!! Form::text('store', $store->store, [
+                            {!! Form::text('store', $store->id, [
                                 'placeholder' => 'Name',
                                 'class' => 'form-control',
                                 'required' => 'true',
                             ]) !!}
                             <span class="material-input"></span>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">store</i>

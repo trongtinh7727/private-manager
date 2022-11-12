@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Store;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
@@ -12,9 +13,15 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private Builder $model;
+
+    public function __construct()
+    {
+        $this->model = (new Store())->query();
+    }
     public function index()
     {
-        $stores = Store::get();
+        $stores = $this->model->get();
 
         return view('Stores.index', [
             'stores' => $stores,
@@ -75,10 +82,14 @@ class StoreController extends Controller
      * @param  \App\Models\Store  $store
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $store)
+    public function update(Request $request, Store $store)
     {
-        $keys =  ['_token', '_method'];
-        $user = Store::query()->where('store', $store)->update($request->except($keys));
+        $store->update(
+            $request->except(
+                '_token',
+                '_method'
+            )
+        );
         return redirect(route('store.index'));
     }
 
@@ -88,9 +99,9 @@ class StoreController extends Controller
      * @param  \App\Models\Store  $store
      * @return \Illuminate\Http\Response
      */
-    public function destroy($store)
+    public function destroy(Store $store)
     {
-        Store::query()->where('store', $store)->delete();
+        $store->delete();
         return redirect(route('store.index'));
     }
 }

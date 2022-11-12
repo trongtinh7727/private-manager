@@ -59,7 +59,7 @@
                                                     <tr>
                                                         <td>{{ $employee->name }}</td>
                                                         <td>{{ $employee->birthday }}</td>
-                                                        <td>{{ $employee->store }}</td>
+                                                        <td>{{ $employee->store_id }}</td>
                                                         <td class="text-right">
                                                             <a href="#" data-toggle="modal"
                                                                 data-target="#ModalEdit"

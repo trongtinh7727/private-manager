@@ -14,12 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('details', function (Blueprint $table) {
-            $table->string('email');
-            $table->string('machine');
+            $table->id();
             $table->integer('entry_point');
             $table->integer('exit_point');
             $table->date('updated_at');
             $table->date('created_at');
+            $table->foreignId('employee_id')->constrained();
+            $table->foreignId('machine_id')->constrained();
         });
     }
 

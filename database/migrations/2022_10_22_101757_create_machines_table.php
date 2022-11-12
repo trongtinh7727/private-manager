@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('machines', function (Blueprint $table) {
-            $table->string('machine')->primary();
-            $table->string('store');
+            $table->id();
             $table->string('name');
             $table->date('updated_at');
             $table->date('created_at');
+            $table->foreignId('store_id')->constrained();
         });
     }
 

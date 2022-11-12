@@ -131,13 +131,27 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-7 col-sm-offset-1">
-                                                <div class="form-group label-floating is-empty">
-                                                    <strong>{{ __('Store') }}:</strong>
-                                                    <input class="form-control" name="store" id="store"
-                                                        type="text" required="true" aria-required="true"
-                                                        value="{{ old('store') }}">
-                                                    <span class="material-input"></span>
+                                                <div class=" col-sm-7">
+                                                    <div class="btn-group bootstrap-select show-tick open">
+                                                        <select class="store selectpicker" name="store_id"
+                                                            data-style="select-with-transition" title="Chọn cửa hàng"
+                                                            data-size="7" tabindex="-98">
+                                                            <option disabled="">Chọn cửa hàng</option>
+                                                            @foreach ($stores as $store)
+                                                                <option value="{{ $store->id }}">
+                                                                    {{ $store->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
+                                                {{-- <div class="form-group label-floating is-empty">
+                                                    <strong>{{ __('Store') }}:</strong>
+                                                    <input class="form-control" name="store_id" id="store_id"
+                                                        type="text" required="true" aria-required="true"
+                                                        value="{{ old('store_id') }}">
+                                                    <span class="material-input"></span>
+                                                </div> --}}
                                             </div>
 
                                         </div>

@@ -2,25 +2,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Thêm cửa hàng</h5>
             </div>
             <div class="modal-body">
                 <form action="{{ route('store.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">code</i>
-                        </span>
-                        <div class="form-group">
-                            <strong>{{ __('Mã cửa hàng') }}:</strong>
-                            <input class="form-control" name="store" id="store" type="text" required="true"
-                                aria-required="true">
-                            <span class="material-input"></span>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">store</i>
+                            <i class="material-icons">label</i>
                         </span>
                         <div class="form-group">
                             <strong>{{ __('Tên cửa hàng') }}:</strong>

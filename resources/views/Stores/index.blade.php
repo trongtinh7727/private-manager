@@ -59,7 +59,7 @@
                                             <tbody>
                                                 @foreach ($stores as $store)
                                                     <tr>
-                                                        <td>{{ $store->store }}</td>
+                                                        <td>{{ $store->id }}</td>
                                                         <td>{{ $store->name }}</td>
                                                         <td>{{ $store->address }}</td>
                                                         <td class="text-right">
@@ -69,7 +69,7 @@
                                                                 <i class="material-icons">dvr</i>
                                                             </a>
                                                             <form style="display: inline"
-                                                                action="{{ route('store.destroy', ['store' => $store->store]) }}"
+                                                                action="{{ route('store.destroy', $store) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')

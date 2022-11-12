@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Employee\StoreRequest;
 use App\Models\Employee;
+use App\Models\Store;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -14,6 +16,13 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    private Builder $model;
+
+    public function __construct()
+    {
+        $this->model = (new Employee())->query();
+    }
+
     public function login()
     {
         return view('login');
@@ -21,7 +30,7 @@ class EmployeeController extends Controller
     public function index()
     {
 
-        $employees = Employee::get();
+        $employees = $this->model->get();
 
         return view('Employees.index', [
             'employees' => $employees,
@@ -35,7 +44,10 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('Employees.add');
+        $stores = Store::get();
+        return view('Employees.add', [
+            'stores' => $stores,
+        ]);
     }
 
     /**

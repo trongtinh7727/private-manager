@@ -10,8 +10,7 @@ class Store extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'address',
-        'store'
+        'address'
     ];
 
     public function machines()

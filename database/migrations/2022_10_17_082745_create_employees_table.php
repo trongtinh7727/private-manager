@@ -14,15 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->string('email', 30)->primary();
+            $table->id();
+            $table->string('email', 30)->unique();
             $table->string('password', 30);
             $table->string('name', 50);
-            $table->string('address');
-            $table->date('birthday');
-            $table->integer('level');
-            $table->string('store', 30);
+            $table->string('address')->default('');
+            $table->date('birthday')->default('2003/01/01');
+            $table->smallInteger('level')->comment('EmployeeLevelEnum')->index();
             $table->date('updated_at');
             $table->date('created_at');
+            //foreign key -> store
+            $table->foreignId('store_id')->constrained();
         });
     }
 

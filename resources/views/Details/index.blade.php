@@ -37,7 +37,7 @@
                                                         data-size="7" tabindex="-98">
                                                         <option disabled="">Chọn cửa hàng</option>
                                                         @foreach ($stores as $store)
-                                                            <option value="{{ $store->store }}">{{ $store->name }}
+                                                            <option value="{{ $store->id }}">{{ $store->name }}
                                                             </option>
                                                         @endforeach
                                                     </select>

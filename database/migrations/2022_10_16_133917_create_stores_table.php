@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('stores', function (Blueprint $table) {
-            $table->String('store')->primary();
+            $table->id();
             $table->String('name');
             $table->String('address');
             $table->date('updated_at');

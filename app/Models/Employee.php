@@ -15,6 +15,6 @@ class Employee extends Model
         'password',
         'address',
         'level',
-        'store'
+        'store_id'
     ];
 }
