@@ -17,31 +17,33 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('employee.update', ['employee' => $employee->email]) }}" method="post"
-                    enctype="multipart/form-data" onsubmit=" validateMyForm();">
+                <form id="form" action="" method="post" enctype="multipart/form-data"
+                    onsubmit=" validateMyForm();">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" id="id" name="id">
                     <div class="form-group label-floating is-empty">
                         <strong>{{ __('Full Name') }}:</strong>
-                        {!! Form::text('name', $employee->name, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
+                        {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control', 'id' => 'name']) !!}
                         <span class="material-input"></span>
                     </div>
                     <div class="input-group">
-
                         <div class="form-group">
                             <strong>{{ __('Ngày Sinh') }}:</strong>
-                            {!! Form::text('birthday', $employee->birthday, [
+                            {!! Form::text('birthday', null, [
                                 'placeholder' => 'Name',
                                 'class' => 'form-control datetimepicker',
+                                'id' => 'birthday',
                             ]) !!}
                         </div>
                     </div>
                     <div class="form-group label-floating is-empty">
                         <strong>{{ __('Email Address') }}:</strong>
-                        {!! Form::text('email', $employee->email, [
+                        {!! Form::text('email', null, [
                             'placeholder' => 'Name',
                             'class' => 'form-control',
                             'type' => 'email',
+                            'id' => 'email',
                         ]) !!}
 
                         <span class="material-input"></span>
@@ -55,7 +57,23 @@
                             required="true" aria-required="true">
                         <span class="material-input"></span>
                     </div>
-                    <button class="btn btn-success" type="submit">
+                    <input type="hidden" name="store_id" id="store_in">
+                    <div class="form-group label-floating is-empty">
+                        <strong>{{ __('Cửa hàng') }}:</strong>
+                        <div class="btn-group bootstrap-select show-tick open">
+                            <select class="store selectpicker" data-style="select-with-transition" title="Chọn cửa hàng"
+                                data-size="7" tabindex="-98" id="store_sl">
+                                <option disabled="">Chọn cửa hàng</option>
+                                @foreach ($stores as $store)
+                                    {{ $store->id }}
+                                    <option value="{{ $store->id }}">
+                                        {{ $store->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" type="submit" onclick="fill()">
                         <span class="btn-label">
                         </span>
                         Sửa
@@ -65,3 +83,26 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).on('click', '.open_modal', function() {
+        var url = "http://private-manager.test/employees/edit";
+        var employee = $(this).val();
+        var action = "{{ route('employee.update', ['employee' => '1']) }}"
+        $.get(url + '/' + employee, function(data) {
+            //success data
+            console.log(data);
+            $('#id').val(data.id);
+            $('#name').val(data.name);
+            $('#birthday').val(data.birthday);
+            $('#email').val(data.email);
+            $('#store_sl').val(data.store_id).trigger("change");
+            $('#form').attr('action', action.substring(0, action.length - 1) + data
+                .id);
+            $('#ModalEdit').modal('show');
+        })
+    });
+
+    function fill() {
+        $('#store_in').val($('#store_sl').val())
+    }
+</script>

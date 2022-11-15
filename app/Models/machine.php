@@ -11,12 +11,12 @@ class machine extends Model
     protected $fillable = [
         'name',
         'machine',
-        'store'
+        'store_id'
     ];
 
     public function store()
     {
-        return $this->belongsTo(Store::class, 'store');
+        return $this->belongsTo(Store::class);
     }
 
     public function details()

@@ -9,24 +9,20 @@
                     @csrf
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="material-icons">code</i>
-                        </span>
-                        <div class="form-group">
-                            <strong>{{ __('Mã máy') }}:</strong>
-                            <input class="form-control" name="machine" id="machine" type="text" required="true"
-                                aria-required="true">
-                            <span class="material-input"></span>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
                             <i class="material-icons">store</i>
                         </span>
                         <div class="form-group">
-                            <strong>{{ __('Mã cửa hàng') }}:</strong>
-                            <input class="form-control" name="store" id="store" type="text" required="true"
-                                aria-required="true">
-                            <span class="material-input"></span>
+                            <div class="btn-group bootstrap-select show-tick open">
+                                <select class="store selectpicker" name="store_id" data-style="select-with-transition"
+                                    title="Chọn cửa hàng" data-size="7" tabindex="-98">
+                                    <option disabled="">Chọn cửa hàng</option>
+                                    @foreach ($stores as $store)
+                                        <option value="{{ $store->id }}">
+                                            {{ $store->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
 

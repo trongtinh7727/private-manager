@@ -8,59 +8,59 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('machine.update', ['machine' => $machine->machine]) }}" method="post"
-                    enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data" id="form">
                     @csrf
                     @method('PUT')
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">code</i>
-                        </span>
-                        <div class="form-group">
-                            <strong>{{ __('Mã máy game') }}:</strong>
-                            {!! Form::text('machine', $machine->machine, [
-                                'placeholder' => 'Name',
-                                'class' => 'form-control',
-                                'required' => 'true',
-                            ]) !!}
-                            <span class="material-input"></span>
-                        </div>
+                    <input type="hidden" id="id" name="id">
+                    <input type="hidden" name="store_id" id="store_in">
+                    <div class="form-group label-floating is-empty">
+                        <strong>{{ __('Full Name') }}:</strong>
+                        {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control', 'id' => 'm_name']) !!}
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">label</i>
-                        </span>
-                        <div class="form-group">
-                            <strong>{{ __('Tên') }}:</strong>
-                            {!! Form::text('name', $machine->name, [
-                                'placeholder' => 'Name',
-                                'class' => 'form-control',
-                                'required' => 'true',
-                            ]) !!}
-                            <span class="material-input"></span>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">store</i>
-                        </span>
-                        <div class="form-group">
-                            <strong>{{ __('Cửa hàng') }}:</strong>
-                            {!! Form::text('store', $machine->store, [
-                                'placeholder' => 'Name',
-                                'class' => 'form-control',
-                                'required' => 'true',
-                            ]) !!}
-                            <span class="material-input"></span>
+
+                    <div class="form-group label-floating is-empty">
+                        <strong>{{ __('Cửa hàng') }}:</strong>
+                        <div class="btn-group bootstrap-select show-tick open">
+                            <select class="store selectpicker" data-style="select-with-transition" title="Chọn cửa hàng"
+                                data-size="7" tabindex="-98" id="store_sl">
+                                <option disabled="">Chọn cửa hàng</option>
+                                @foreach ($stores as $store)
+                                    {{ $store->id }}
+                                    <option value="{{ $store->id }}">
+                                        {{ $store->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary" onclick="fill()">Save</button>
             </div>
             </form>
         </div>
     </div>
 </div>
 </div>
+<script>
+    $(document).on('click', '.open_modal', function() {
+        var url = "http://private-manager.test/machines/edit";
+        var machine = $(this).val();
+        var action = "{{ route('machine.update', ['machine' => '1']) }}"
+        $.get(url + '/' + machine, function(data) {
+            //success data
+            console.log(data);
+            $('#id').val(data.id);
+            $('#m_name').val(data.name);
+            $('#store_sl').val(data.store_id).trigger("change");
+            $('#form').attr('action', action.substring(0, action.length - 1) + data
+                .id);
+            $('#ModalEdit').modal('show');
+        })
+    });
+
+    function fill() {
+        $('#store_in').val($('#store_sl').val())
+    }
+</script>

@@ -32,8 +32,10 @@ class EmployeeController extends Controller
 
         $employees = $this->model->get();
 
+        $stores = Store::get();
         return view('Employees.index', [
             'employees' => $employees,
+            'stores' => $stores
         ]);
     }
 
@@ -82,11 +84,8 @@ class EmployeeController extends Controller
      */
     public function edit($employee)
     {
-        $user = Employee::query()->where('email', $employee)->first();
-
-        return view('Employees.modal.edit', [
-            'employee' => $user,
-        ]);
+        $user = Employee::query()->where('id', $employee)->first();
+        return $user->getAttributes();
     }
 
     /**
@@ -96,10 +95,16 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $employee)
+    public function update(Request $request, Employee $employee)
     {
-        $keys =  ['_token', '_method'];
-        $user = Employee::query()->where('email', $employee)->update($request->except($keys));
+
+        $employee->update(
+            $request->except(
+                '_token',
+                '_method'
+            )
+        );
+
         return redirect(route('employee.index'));
     }
 

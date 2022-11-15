@@ -43,8 +43,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>#Mã máy</th>
-                                                    <th>Mã cửa hàng</th>
                                                     <th>Tên máy</th>
+                                                    <th>Cửa hàng</th>
 
                                                     <th class="disabled-sorting text-right">Actions</th>
                                                 </tr>
@@ -52,25 +52,25 @@
                                             <tfoot>
                                                 <tr>
                                                     <th>#Mã máy</th>
-                                                    <th>Mã cửa hàng</th>
                                                     <th>Tên máy</th>
+                                                    <th>Cửa hàng</th>
                                                     <th class="disabled-sorting text-right">Actions</th>
                                                 </tr>
                                             </tfoot>
                                             <tbody>
                                                 @foreach ($machines as $machine)
                                                     <tr>
-                                                        <td>{{ $machine->machine }}</td>
-                                                        <td>{{ $machine->store }}</td>
+                                                        <td>{{ $machine->id }}</td>
                                                         <td>{{ $machine->name }}</td>
+                                                        <td>{{ $machine->store->name }}</td>
                                                         <td class="text-right">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#ModalEdit"
-                                                                class="btn btn-simple btn-warning btn-icon edit">
+                                                            <button
+                                                                class="btn btn-simple btn-warning btn-icon edit open_modal"
+                                                                value="{{ $machine->id }}">
                                                                 <i class="material-icons">dvr</i>
-                                                            </a>
+                                                            </button>
                                                             <form style="display: inline"
-                                                                action="{{ route('machine.destroy', ['machine' => $machine->machine]) }}"
+                                                                action="{{ route('machine.destroy', [$machine]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')

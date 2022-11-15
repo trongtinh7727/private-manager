@@ -23,10 +23,4 @@ class Employee extends Model
     {
         return $this->belongsTo(Store::class);
     }
-
-    public function getStoreName()
-    {
-        $store = $this->store();
-        return $store->get('name')->first()['name'];
-    }
 }

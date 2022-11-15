@@ -59,13 +59,14 @@
                                                     <tr>
                                                         <td>{{ $employee->name }}</td>
                                                         <td>{{ $employee->birthday }}</td>
-                                                        <td>{{ $employee->getStoreName() }}</td>
+                                                        <td>{{ $employee->store->name }}</td>
                                                         <td class="text-right">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#ModalEdit"
-                                                                class="btn btn-simple btn-warning btn-icon edit">
-                                                                <i class="material-icons">dvr</i>
-                                                            </a>
+
+                                                            <button
+                                                                class="btn btn-simple btn-warning btn-icon edit open_modal"
+                                                                value="{{ $employee->id }}"><i
+                                                                    class="material-icons">dvr</i></button>
+
                                                             <form style="display: inline"
                                                                 action="{{ route('employee.destroy', ['employee' => $employee->email]) }}"
                                                                 method="POST">
@@ -161,7 +162,6 @@
             alter('aaaaa');
 
         });
-
         $('.card .material-datatables label').addClass('form-group');
     });
 </script>
