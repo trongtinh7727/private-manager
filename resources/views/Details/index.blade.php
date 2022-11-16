@@ -114,7 +114,7 @@
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
     $('#search').on('click', function() {
-        document.createForm.store.value = $(".store.selectpicker").val()
+        // document.createForm.store.value = $(".store.selectpicker").val()
         $value = "tinh";
         $.ajax({
             type: 'post',

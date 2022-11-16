@@ -14,8 +14,17 @@
                         </span>
                         <div class="form-group">
                             <strong>{{ __('Mã máy') }}:</strong>
-                            <input class="form-control" name="machine" id="machine" type="text" required="true"
-                                aria-required="true">
+                            <div class="btn-group bootstrap-select show-tick open">
+                                <select class="store selectpicker" id="machine_sl" data-style="select-with-transition"
+                                    title="Chọn máy" data-size="7" tabindex="-98">
+                                    <option disabled="">Chọn máy</option>
+                                    @foreach ($machines as $machine)
+                                        <option value="{{ $machine->id }}">
+                                            {{ $machine->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <span class="material-input"></span>
                         </div>
                     </div>
@@ -40,9 +49,10 @@
                                 aria-required="true">
                             <span class="material-input"></span>
                         </div>
-                        <input id="store" name="store" type="hidden">
+                        <input id="store_id" name="store_id" type="hidden">
                         <input id="date" name="date" type="hidden">
-                        <input name="email" type="hidden">
+                        <input name="employee_id" type="hidden">
+                        <input class="form-control" name="machine_id" id="machine" type="hidden">
                     </div>
             </div>
             <div class="modal-footer">
@@ -55,9 +65,10 @@
 </div>
 <script>
     $('#createForm').on('submit', function() {
-        document.createForm.store.value = $(".store.selectpicker").val()
+        document.createForm.store_id.value = $(".store.selectpicker").val()
         document.createForm.date.value = $("#date").val()
-        document.createForm.email.value = "trongtinh7727@gmail.com"
+        document.createForm.employee_id.value = "3"
+        document.createForm.machine_id.value = $("#machine_sl").val()
         return true;
     });
 </script>

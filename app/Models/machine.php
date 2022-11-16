@@ -21,6 +21,6 @@ class machine extends Model
 
     public function details()
     {
-        return $this->hasMany(detail::class, 'machine');
+        return $this->hasMany(detail::class);
     }
 }

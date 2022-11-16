@@ -20,56 +20,36 @@ class DetailController extends Controller
     {
         $details = detail::get();
         $stores = Store::get();
+        $machines = machine::get();
 
         return view('details.index', [
             'details' => $details,
             'stores' => $stores,
+            'machines' => $machines,
         ]);
     }
-
-    public function getDeta($date)
-    {
-        $Details = detail::orderby('machine', 'asc')->select('machine', 'entry_point', 'exit_point')
-            ->where('created_at', '=', $date)
-            ->get();
-    }
-
     public function getDetail(Request $request)
     {
-        $store = $request->store;
+
+        $store = Store::query()->where('id', $request->store)->first();
         $date = $request->date;
 
-        $machine = machine::find('CH01')->machine;
-        dd($machine);
-        $Details = detail::orderby('machine', 'asc')->select('machine', 'entry_point', 'exit_point')
-            ->where('created_at', '=', $date)
-            ->get();
-
-        // if ($store == '') {
-        //     $Details = detail::orderby('machine', 'asc')->select('machine', 'entry_point', 'exit_point')->limit(5)->get();
-        // } else {
-        //     $Details = detail::orderby('machine', 'asc')->select('machine', 'entry_point', 'exit_point')
-        //         ->where('created_at', '=', $date)
-        //         ->get();
-        // }
+        $machines = $store->machines;
         $response = '';
         $id = 1;
-        $prev = null;
-        foreach ($Details as $Detail) {
+        foreach ($machines as $machine) {
+            $Detail = detail::query()->where('machine_id',  $machine->id)->where('created_at', $date)->first();
+            if ($Detail == null) {
+                continue;
+            }
             $response .= '<tr>
                     <td>' . $id . '</td>
-                    <td>' . $Detail->machine . '</td>
+                    <td>' . $machine->id . '</td>
                     <td>' . $Detail->entry_point . '</td>
                     <td>' . $Detail->exit_point . '</td>
-                    <td>' . $Detail->new_profit() . '</td>';
-
-            if ($prev) {
-                $response .=  '<td>' . $prev->new_profit() . '</td>';
-            } else {
-                $response .=  '<td>' . " " . '</td>';
-            }
-            $response .=
-                '<td>' . $Detail->sumOf() . '</td>
+                    <td>' . $Detail->new_profit() . '</td>
+                    <td>' . $Detail->old_profit() . '</td>
+                    <td>' . $Detail->sumOf() . '</td>
                     <td>' . "price" . '</td>
                     <td class="td-actions text-right">
                         <button type="button" rel="tooltip" class="btn btn-info btn-round" data-original-title="" title="">
