@@ -7,14 +7,14 @@
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Quản Lý Cửa Hàng</title>
-    @include('header')
+    @include('Layout.header')
 </head>
 
 <body>
     <div class="wrapper">
-        @include('sidebar')
+        @include('Layout.sidebar')
         <div class="main-panel">
-            @include('headerbar')
+            @include('Layout.headerbar')
             <!-- TODO: Content -->
             <div class="content">
                 <div class="container-fluid">
@@ -35,7 +35,7 @@
                                             </span>
                                             Thêm
                                         </button>
-                                        @include('stores.modal.create')
+                                        @include('Stores.modal.create')
                                     </div>
                                     <div class="material-datatables">
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover"
@@ -63,11 +63,10 @@
                                                         <td>{{ $store->name }}</td>
                                                         <td>{{ $store->address }}</td>
                                                         <td class="text-right">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#ModalEdit"
-                                                                class="btn btn-simple btn-warning btn-icon edit">
-                                                                <i class="material-icons">dvr</i>
-                                                            </a>
+                                                            <button
+                                                                class="btn btn-simple btn-warning btn-icon edit open_modal"
+                                                                value="{{ $store->id }}"><i
+                                                                    class="material-icons">dvr</i></button>
                                                             <form style="display: inline"
                                                                 action="{{ route('store.destroy', $store) }}"
                                                                 method="POST">
@@ -79,7 +78,7 @@
                                                                 </button>
                                                             </form>
                                                         </td>
-                                                        @include('stores.modal.edit')
+                                                        @include('Stores.modal.edit')
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -99,7 +98,7 @@
         </div>
     </div>
 </body>
-@include('footer')
+@include('Layout.footer')
 <script type="text/javascript">
     document.getElementById("store").classList.add("active");
     $(document).ready(function() {

@@ -45,19 +45,24 @@
 </div>
 <script>
     $(document).on('click', '.open_modal', function() {
-        var url = "http://private-manager.test/machines/edit";
+        var url = "machines/edit";
         var machine = $(this).val();
         var action = "{{ route('machine.update', ['machine' => '1']) }}"
-        $.get(url + '/' + machine, function(data) {
-            //success data
-            console.log(data);
-            $('#id').val(data.id);
-            $('#m_name').val(data.name);
-            $('#store_sl').val(data.store_id).trigger("change");
-            $('#form').attr('action', action.substring(0, action.length - 1) + data
-                .id);
-            $('#ModalEdit').modal('show');
-        })
+
+        $.ajax({
+            type: 'get',
+            url: url + '/' + machine,
+            success: function(data) {
+                //success data
+                console.log(data);
+                $('#id').val(data.id);
+                $('#m_name').val(data.name);
+                $('#store_sl').val(data.store_id).trigger("change");
+                $('#form').attr('action', action.substring(0, action.length - 1) + data
+                    .id);
+                $('#ModalEdit').modal('show');
+            }
+        });
     });
 
     function fill() {

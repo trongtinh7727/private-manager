@@ -8,33 +8,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('store.update', $store) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('store.update', $store) }}" id="form" method="post"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    {{-- <div class="input-group">
-                        <span class="input-group-addon">
-                            <i class="material-icons">code</i>
-                        </span>
-                        <div class="form-group">
-                            <strong>{{ __('Mã cửa hàng') }}:</strong>
-                            {!! Form::text('store', $store->id, [
-                                'placeholder' => 'Name',
-                                'class' => 'form-control',
-                                'required' => 'true',
-                            ]) !!}
-                            <span class="material-input"></span>
-                        </div>
-                    </div> --}}
+                    <input type="hidden" id="id" name="id">
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">store</i>
                         </span>
                         <div class="form-group">
                             <strong>{{ __('Tên cửa hàng') }}:</strong>
-                            {!! Form::text('name', $store->name, [
+                            {!! Form::text('name', null, [
                                 'placeholder' => 'Name',
                                 'class' => 'form-control',
                                 'required' => 'true',
+                                'id' => 's_name',
                             ]) !!}
                             <span class="material-input"></span>
                         </div>
@@ -45,10 +34,11 @@
                         </span>
                         <div class="form-group">
                             <strong>{{ __('Địa chỉ') }}:</strong>
-                            {!! Form::text('address', $store->address, [
+                            {!! Form::text('address', null, [
                                 'placeholder' => 'Name',
                                 'class' => 'form-control',
                                 'required' => 'true',
+                                'id' => 's_address',
                             ]) !!}
                             <span class="material-input"></span>
                         </div>
@@ -63,3 +53,25 @@
     </div>
 </div>
 </div>
+<script>
+    $(document).on('click', '.open_modal', function() {
+        var url = "stores/edit";
+        var store = $(this).val();
+        var action = "{{ route('store.update', ['store' => '1']) }}"
+
+        $.ajax({
+            type: 'get',
+            url: url + '/' + store,
+            success: function(data) {
+                //success data
+                console.log(data);
+                $('#id').val(data.id);
+                $('#s_address').val(data.address);
+                $('#s_name').val(data.name);
+                $('#form').attr('action', action.substring(0, action.length - 1) + data
+                    .id);
+                $('#ModalEdit').modal('show');
+            }
+        });
+    });
+</script>

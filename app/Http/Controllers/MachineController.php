@@ -20,7 +20,7 @@ class MachineController extends Controller
         $machines = machine::get();
         $stores = Store::get();
 
-        return view('machines.index', [
+        return view('Machines.index', [
             'machines' => $machines,
             'stores' => $stores
         ]);
@@ -68,9 +68,9 @@ class MachineController extends Controller
      * @param  \App\Models\machine  $machine
      * @return \Illuminate\Http\Response
      */
-    public function edit($machine)
+    public function edit(machine $machine)
     {
-        $machine = machine::query()->where('id', $machine)->first();
+        // $machine = machine::query()->where('id', $machine)->first();
         return $machine->getAttributes();
     }
 
@@ -96,10 +96,9 @@ class MachineController extends Controller
      * @param  \App\Models\machine  $machine
      * @return \Illuminate\Http\Response
      */
-    public function destroy($machine)
+    public function destroy(machine $machine)
     {
-        //
-        machine::query()->where('machine', $machine)->delete();
+        $machine->delete();
         return redirect(route('machine.index'));
     }
 }

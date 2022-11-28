@@ -8,14 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Quản Lý Cửa Hàng</title>
-    @include('header')
+    @include('Layout.header')
 </head>
 
 <body>
     <div class="wrapper">
-        @include('sidebar')
+        @include('Layout.sidebar')
         <div class="main-panel">
-            @include('headerbar')
+            @include('Layout.headerbar')
             <!-- TODO: Content -->
             <div class="content">
                 <div class="container-fluid">
@@ -72,7 +72,7 @@
                                                     </button>
                                                 </a>
                                             </div>
-                                            @include('details.modal.create')
+                                            @include('Details.modal.create')
                                         </div>
                                         <table class="table">
                                             <thead>
@@ -107,7 +107,7 @@
         </div>
     </div>
 </body>
-@include('footer')
+@include('Layout.footer')
 <script type="text/javascript">
     document.getElementById("detail").classList.add("active");
     demo.initFormExtendedDatetimepickers()

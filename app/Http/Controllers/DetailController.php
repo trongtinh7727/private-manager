@@ -22,7 +22,7 @@ class DetailController extends Controller
         $stores = Store::get();
         $machines = machine::get();
 
-        return view('details.index', [
+        return view('Details.index', [
             'details' => $details,
             'stores' => $stores,
             'machines' => $machines,

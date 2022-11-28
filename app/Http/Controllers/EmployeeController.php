@@ -114,9 +114,9 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy($employee)
+    public function destroy(Employee $employee)
     {
-        Employee::query()->where('email', $employee)->delete();
+        $employee->delete();
         return redirect(route('employee.index'));
     }
 }

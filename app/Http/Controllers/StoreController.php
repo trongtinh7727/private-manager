@@ -72,7 +72,7 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
-        //
+        return $store->getAttributes();
     }
 
     /**

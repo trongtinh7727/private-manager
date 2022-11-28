@@ -7,14 +7,14 @@
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Material Dashboard Pro by Creative Tim</title>
-    @include('header')
+    @include('Layout.header')
 </head>
 
 <body>
     <div class="wrapper">
-        @include('sidebar')
+        @include('Layout.sidebar')
         <div class="main-panel">
-            @include('headerbar')
+            @include('Layout.headerbar')
             <!-- TODO: Content -->
             <div class="content">
                 <div class="container-fluid">
@@ -68,7 +68,7 @@
                                                                     class="material-icons">dvr</i></button>
 
                                                             <form style="display: inline"
-                                                                action="{{ route('employee.destroy', ['employee' => $employee->email]) }}"
+                                                                action="{{ route('employee.destroy', ['employee' => $employee]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -98,7 +98,7 @@
         </div>
     </div>
 </body>
-@include('footer')
+@include('Layout.footer')
 <script type="text/javascript">
     document.getElementById("employee").classList.add("active");
     $(document).ready(function() {

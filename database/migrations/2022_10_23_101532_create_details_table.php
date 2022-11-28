@@ -19,8 +19,12 @@ return new class extends Migration
             $table->integer('exit_point');
             $table->date('updated_at');
             $table->date('created_at');
-            $table->foreignId('employee_id')->constrained();
-            $table->foreignId('machine_id')->constrained();
+            $table->foreignId('employee_id')
+                ->constrained()
+                ->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('machine_id')
+                ->constrained()
+                ->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

@@ -85,21 +85,24 @@
 </div>
 <script>
     $(document).on('click', '.open_modal', function() {
-        var url = "http://private-manager.test/employees/edit";
+        var url = "employees/edit/";
         var employee = $(this).val();
         var action = "{{ route('employee.update', ['employee' => '1']) }}"
-        $.get(url + '/' + employee, function(data) {
-            //success data
-            console.log(data);
-            $('#id').val(data.id);
-            $('#name').val(data.name);
-            $('#birthday').val(data.birthday);
-            $('#email').val(data.email);
-            $('#store_sl').val(data.store_id).trigger("change");
-            $('#form').attr('action', action.substring(0, action.length - 1) + data
-                .id);
-            $('#ModalEdit').modal('show');
-        })
+        $.ajax({
+            type: 'get',
+            url: url + employee,
+            success: function(data) {
+                console.log(data);
+                $('#id').val(data.id);
+                $('#name').val(data.name);
+                $('#birthday').val(data.birthday);
+                $('#email').val(data.email);
+                $('#store_sl').val(data.store_id).trigger("change");
+                $('#form').attr('action', action.substring(0, action.length - 1) + data
+                    .id);
+                $('#ModalEdit').modal('show');
+            }
+        });
     });
 
     function fill() {

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->date('updated_at');
             $table->date('created_at');
-            $table->foreignId('store_id')->constrained();
+            $table->foreignId('store_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 
