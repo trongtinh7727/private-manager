@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +19,7 @@ class StoreController extends Controller
     public function __construct()
     {
         $this->model = (new Store())->query();
+        $this->middleware('auth');
     }
     public function index()
     {

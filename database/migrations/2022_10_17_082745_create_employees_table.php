@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('email', 30)->unique();
-            $table->string('password', 30);
             $table->string('name', 50);
             $table->string('address')->default('');
             $table->date('birthday')->default('2003/01/01');
@@ -25,6 +23,7 @@ return new class extends Migration
             $table->date('created_at');
             //foreign key -> store
             $table->foreignId('store_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

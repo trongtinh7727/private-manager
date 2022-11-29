@@ -9,12 +9,9 @@ class Employee extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "email",
         'name',
         'birthday',
-        'password',
         'address',
-        'level',
         'store_id'
     ];
 
@@ -22,5 +19,9 @@ class Employee extends Model
     public function store()
     {
         return $this->belongsTo(Store::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

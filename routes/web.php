@@ -6,6 +6,7 @@ use App\Http\Controllers\MachineController;
 use App\Http\Controllers\NhanVienController;
 use App\Http\Controllers\StoreController;
 use App\Models\machine;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -61,3 +62,11 @@ Route::group(['prefix' => 'details', 'as' => 'detail.'], function () {
     Route::get('/edit/{detail}', [DetailController::class, 'edit'])->name('edit');
     Route::put('/update/{detail}', [DetailController::class, 'update'])->name('update');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
