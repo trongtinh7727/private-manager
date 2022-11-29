@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('address')->default('');
             $table->date('birthday')->default('2003/01/01');
-            $table->smallInteger('level')->comment('EmployeeLevelEnum')->index();
             $table->date('updated_at');
             $table->date('created_at');
             //foreign key -> store

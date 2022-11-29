@@ -18,7 +18,6 @@ return new class extends Migration
             $table->text("name");
             $table->text("email");
             $table->text("password");
-            $table->integer("level")->default(1);
             $table->text("remember_token")->nullable();
             $table->timestamps();
         });
