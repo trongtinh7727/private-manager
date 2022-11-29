@@ -47,7 +47,6 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="about">
                                         <div class="row">
-
                                             <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">

@@ -7,6 +7,7 @@ use App\Http\Requests\StoremachineRequest;
 use App\Http\Requests\UpdatemachineRequest;
 use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MachineController extends Controller
 {
@@ -24,6 +25,9 @@ class MachineController extends Controller
         $machines = machine::get();
         $stores = Store::get();
 
+        if (Auth::user()->hasRole("Admin")) {
+            $machines = Auth::user()->employee->store->machines;
+        }
         return view('Machines.index', [
             'machines' => $machines,
             'stores' => $stores

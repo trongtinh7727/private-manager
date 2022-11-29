@@ -12,17 +12,22 @@
                             <i class="material-icons">store</i>
                         </span>
                         <div class="form-group">
-                            <div class="btn-group bootstrap-select show-tick open">
+                            @hasrole(['SupperAdmin'])
                                 <select class="store selectpicker" name="store_id" data-style="select-with-transition"
                                     title="Chọn cửa hàng" data-size="7" tabindex="-98">
                                     <option disabled="">Chọn cửa hàng</option>
                                     @foreach ($stores as $store)
-                                        <option value="{{ $store->id }}">
-                                            {{ $store->name }}
+                                        <option value="{{ $store->id }}">{{ $store->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                            </div>
+                            @else
+                                <select class="store selectpicker" name="store_id" data-style="select-with-transition"
+                                    title="Chọn cửa hàng" data-size="7" tabindex="-98">
+                                    <option value="{{ Auth::user()->employee->store->id }}" selected>
+                                        {{ Auth::user()->employee->store->name }}</option>
+                                </select>
+                            @endhasrole
                         </div>
                     </div>
 

@@ -16,6 +16,7 @@ class StoreController extends Controller
      */
     private Builder $model;
 
+
     public function __construct()
     {
         $this->model = (new Store())->query();
@@ -23,7 +24,7 @@ class StoreController extends Controller
     }
     public function index()
     {
-        $stores = $this->model->get();
+        $stores = $this->query()->get();
 
         return view('Stores.index', [
             'stores' => $stores,

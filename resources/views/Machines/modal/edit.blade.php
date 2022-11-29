@@ -21,16 +21,22 @@
                     <div class="form-group label-floating is-empty">
                         <strong>{{ __('Cửa hàng') }}:</strong>
                         <div class="btn-group bootstrap-select show-tick open">
-                            <select class="store selectpicker" data-style="select-with-transition" title="Chọn cửa hàng"
-                                data-size="7" tabindex="-98" id="store_sl">
-                                <option disabled="">Chọn cửa hàng</option>
-                                @foreach ($stores as $store)
-                                    {{ $store->id }}
-                                    <option value="{{ $store->id }}">
-                                        {{ $store->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            @hasrole(['SupperAdmin'])
+                                <select class="store selectpicker" data-style="select-with-transition" title="Chọn cửa hàng"
+                                    data-size="7" tabindex="-98" id="store_sl">
+                                    <option disabled="">Chọn cửa hàng</option>
+                                    @foreach ($stores as $store)
+                                        <option value="{{ $store->id }}">{{ $store->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <select class="store selectpicker" data-style="select-with-transition" title="Chọn cửa hàng"
+                                    data-size="7" tabindex="-98">
+                                    <option value="{{ Auth::user()->employee->store->id }}" selected>
+                                        {{ Auth::user()->employee->store->name }}</option>
+                                </select>
+                            @endhasrole
                         </div>
                     </div>
             </div>

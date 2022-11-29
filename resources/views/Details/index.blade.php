@@ -32,15 +32,25 @@
                                             <!--        Here you can write extra buttons/actions for the toolbar              -->
                                             <div class=" col-sm-2">
                                                 <div class="btn-group bootstrap-select show-tick open">
-                                                    <select class="store selectpicker"
-                                                        data-style="select-with-transition" title="Chọn cửa hàng"
-                                                        data-size="7" tabindex="-98">
-                                                        <option disabled="">Chọn cửa hàng</option>
-                                                        @foreach ($stores as $store)
-                                                            <option value="{{ $store->id }}">{{ $store->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                                    @hasrole(['SupperAdmin'])
+                                                        <select class="store selectpicker"
+                                                            data-style="select-with-transition" title="Chọn cửa hàng"
+                                                            data-size="7" tabindex="-98">
+                                                            <option disabled="">Chọn cửa hàng</option>
+                                                            @foreach ($stores as $store)
+                                                                <option value="{{ $store->id }}">{{ $store->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    @else
+                                                        <select class="store selectpicker"
+                                                            data-style="select-with-transition" title="Chọn cửa hàng"
+                                                            data-size="7" tabindex="-98">
+                                                            <option value="{{ Auth::user()->employee->store->id }}"
+                                                                selected>
+                                                                {{ Auth::user()->employee->store->name }}</option>
+                                                        </select>
+                                                    @endhasrole
                                                 </div>
                                             </div>
                                             <div class="col-sm-2 form-group">

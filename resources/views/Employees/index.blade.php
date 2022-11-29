@@ -27,13 +27,14 @@
                                 <div class="card-content">
                                     <h4 class="card-title">Nhân viên</h4>
                                     <div class="toolbar">
-                                        <!--        Here you can write extra buttons/actions for the toolbar              -->
-                                        <a href="{{ route('employee.create') }}"> <button class="btn btn-success">
-                                                <span class="btn-label">
-                                                    <i class="material-icons">add</i>
-                                                </span>
-                                                Thêm
-                                            </button></a>
+                                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                            data-target="#modalCreate">
+                                            <span class="btn-label">
+                                                <i class="material-icons">add</i>
+                                            </span>
+                                            Thêm
+                                        </button>
+                                        @include('Employees.modal.create')
                                     </div>
                                     <div class="material-datatables">
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover"
