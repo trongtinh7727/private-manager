@@ -42,6 +42,11 @@ class CreateRolesCommand extends Command
         $role = Role::findByName('Admin');
         $permissions = DB::table('permissions')->where('name', 'LIKE', "all")->pluck('id', 'id')->all();
         $role->givePermissionTo($permissions);
+
+        // give permission to User
+        $role = Role::findByName('User');
+        $permissions = DB::table('permissions')->where('name', 'LIKE', "all")->pluck('id', 'id')->all();
+        $role->givePermissionTo($permissions);
         return 0;
     }
 }

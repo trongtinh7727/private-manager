@@ -54,11 +54,8 @@ class DetailController extends Controller
                     <td>' . $Detail->new_profit() . '</td>
                     <td>' . $Detail->old_profit() . '</td>
                     <td>' . $Detail->sumOf() . '</td>
-                    <td>' . "price" . '</td>
+                    <td>' . $Detail->note . '</td>
                     <td class="td-actions text-right">
-                        <button type="button" rel="tooltip" class="btn btn-info btn-round" data-original-title="" title="">
-                            <i class="material-icons">person</i>
-                        </button>
                         <button type="button" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
                             <i class="material-icons">edit</i>
                         </button>

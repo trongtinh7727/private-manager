@@ -23,10 +23,12 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                if (Auth::user()->hasRole("Admin|SupperAdmin") && isset($request->all()['email'])) {
+                    return $next($request);
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }
-
         return $next($request);
     }
 }

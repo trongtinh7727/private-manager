@@ -12,9 +12,10 @@ class Employee extends Model
         'name',
         'birthday',
         'address',
-        'store_id'
+        'store_id',
+        'user_id',
+        'email'
     ];
-
 
     public function store()
     {

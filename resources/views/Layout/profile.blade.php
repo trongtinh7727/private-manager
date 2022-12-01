@@ -19,7 +19,6 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-
                         <div class="col-md">
                             <div class="card card-profile">
                                 <div class="card-avatar">
@@ -41,7 +40,7 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Cửa hàng (disabled)</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ Auth::user()->employee->store->name }}" disabled>
+                                                    value="{{ Auth::user()->employee->store->name ?? ' ' }}" disabled>
                                             </div>
                                         </div>
 
@@ -58,9 +57,13 @@
                                         <div class="col-md-12">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Địa chỉ cửa hàng</label>
-                                                <input type="text" class="form-control" disabled
-                                                    value="{{ Auth::user()->employee->store->address }}">
+                                                @hasrole(['SupperAdmin'])
+                                                @else
+                                                    <input type="text" class="form-control" disabled
+                                                        value="{{ Auth::user()->employee->store->address ?? '' }}">
+                                                @endhasrole
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="row">
@@ -68,7 +71,7 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Địa chỉ</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ Auth::user()->employee->address }}" disabled>
+                                                    value="{{ Auth::user()->employee->address ?? '' }}" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -78,7 +81,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </body>

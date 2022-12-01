@@ -14,6 +14,7 @@ class detail extends Model
         'employee_id',
         'machine_id',
         'entry_point',
+        'note',
         'exit_point',
         'created_at'
     ];

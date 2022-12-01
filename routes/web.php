@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['role:Admin| SupperAdmin'])->prefix('')->group(function () {
+Route::middleware(['role:Admin|SupperAdmin'])->prefix('')->group(function () {
     Route::group(['prefix' => 'employees', 'as' => 'employee.'], function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('index');
         Route::get('/create', [EmployeeController::class, 'create'])->name('create');
@@ -53,7 +53,7 @@ Route::middleware(['role:Admin| SupperAdmin'])->prefix('')->group(function () {
     });
 });
 
-Route::middleware(['role:User|Admin| SupperAdmin'])->prefix('')->group(function () {
+Route::middleware(['role:User|Admin|SupperAdmin'])->prefix('')->group(function () {
     Route::group(['prefix' => 'details', 'as' => 'detail.'], function () {
         Route::get('/', [DetailController::class, 'index'])->name('index');
         Route::get('/create', [DetailController::class, 'create'])->name('create');

@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Requests\Employee\StoreRequest;
 use App\Models\Employee;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
+
+use function PHPUnit\Framework\isNull;
 
 class EmployeeController extends Controller
 {
@@ -15,7 +24,7 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    use RegistersUsers;
     private Builder $model;
 
     public function __construct()
@@ -24,19 +33,29 @@ class EmployeeController extends Controller
         $this->model = (new Employee())->query();
     }
 
-    public function login()
-    {
-        return view('login');
-    }
+
     public function index()
     {
-
-        $employees = $this->model->get();
-
+        $users = User::get();
         $stores = Store::get();
+        $roles = Role::get();
+        if (Auth::user()->hasRole("Admin")) {
+            $store = Auth::user()->employee->store;
+            $employees = $store->employees;
+            $users = array();
+            foreach ($employees as $employee) {
+                if ($employee->user->hasRole('SupperAdmin')) {
+                    continue;
+                } else {
+                    $users[] = $employee->user;
+                }
+            }
+        }
+        // dd($users);
         return view('Employees.index', [
-            'employees' => $employees,
-            'stores' => $stores
+            'stores' => $stores,
+            'users' => $users,
+            'roles' => $roles
         ]);
     }
 
@@ -59,9 +78,8 @@ class EmployeeController extends Controller
      * @param  \App\Http\Requests\StoreEmployeeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(Request $request)
     {
-
         $keys =  ['_token', 'password_confirmation', 'finish'];
         Employee::create($request->except($keys));
         return redirect()->route('employee.index');
@@ -85,7 +103,8 @@ class EmployeeController extends Controller
      */
     public function edit($employee)
     {
-        $user = Employee::query()->where('id', $employee)->first();
+        $user = User::query()->where('id', $employee)->first();
+        dd($user->getAttributes());
         return $user->getAttributes();
     }
 
@@ -96,16 +115,41 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request,  $user)
     {
+        $data = $request->all();
+        // dd($data);
+        $user =  User::query()->where('id', $user)->first();
+        $employee = $user->employee;
 
-        $employee->update(
-            $request->except(
-                '_token',
-                '_method'
-            )
-        );
-
+        if (!isset($employee->id)) {
+            $employee = Employee::create(
+                [
+                    'name' => $data['name'],
+                    'store_id' => $data['store_id'],
+                    'user_id' => $user->id,
+                    'email' => $data['email'],
+                ]
+            );
+        } else {;
+            $employee->update(
+                [
+                    'name' => $data['name'],
+                    'store_id' => $data['store_id'],
+                    'email' => $data['email'],
+                ]
+            );
+        }
+        if (Auth::user()->hasRole('SupperAdmin')) {
+            $user->roles()->detach();
+            $user->assignRole([$data['role_id']]);
+        } else {
+            if ($user->hasRole(['SupperAdmin', 'Admin'])) {
+                return redirect(route('employee.index'));
+            }
+            $user->roles()->detach();
+            $user->assignRole(['3']);
+        }
         return redirect(route('employee.index'));
     }
 

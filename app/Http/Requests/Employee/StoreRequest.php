@@ -24,23 +24,12 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'email' => [
-                'bail',
-                'required',
-                'unique:App\Models\Employee,email'
-            ],
-        ];
+        return [];
     }
 
     public function messages(): array
     {
-        $messages = [
-            'email.required' => ':attribute Không được bỏ trống',
-            'email.unique' => ':attribute đã tồn tại',
-            'between' => 'The :attribute value :input is not between :min - :max.',
-            'in' => 'The :attribute must be one of the following types: :values',
-        ];
+        $messages = [];
         return $messages;
     }
 }

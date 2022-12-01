@@ -41,35 +41,42 @@
                                             cellspacing="0" width="100%" style="width:100%">
                                             <thead>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>Họ Tên</th>
-                                                    <th>Ngày sinh</th>
+                                                    <th>Email</th>
+                                                    <th>Vai trò</th>
                                                     <th>Cửa hàng</th>
                                                     <th class="disabled-sorting text-right">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>Họ Tên</th>
-                                                    <th>Ngày sinh</th>
+                                                    <th>Email</th>
+                                                    <th>Vai Trò</th>
                                                     <th>Cửa hàng</th>
                                                     <th class="disabled-sorting text-right">Actions</th>
                                                 </tr>
                                             </tfoot>
                                             <tbody>
-                                                @foreach ($employees as $employee)
+                                                @php($i = 1)
+                                                @foreach ($users as $user)
                                                     <tr>
-                                                        <td>{{ $employee->name }}</td>
-                                                        <td>{{ $employee->birthday }}</td>
-                                                        <td>{{ $employee->store->name }}</td>
+                                                        <td>{{ $i }}</td>
+                                                        <td>{{ $user->name }}</td>
+                                                        <td>{{ $user->email }}</td>
+                                                        <td>{{ $user->roles->pluck('name')[0] ?? 'Chưa kích hoạt' }}
+                                                        </td>
+                                                        <td>{{ $user->employee->store->name ?? 'Chưa kích hoạt' }}</td>
                                                         <td class="text-right">
-
-                                                            <button
+                                                            <button data-toggle="modal"
                                                                 class="btn btn-simple btn-warning btn-icon edit open_modal"
-                                                                value="{{ $employee->id }}"><i
+                                                                value="{{ $user->id }}"
+                                                                data-target="#ModalEdit{{ $i++ }}"><i
                                                                     class="material-icons">dvr</i></button>
-
                                                             <form style="display: inline"
-                                                                action="{{ route('employee.destroy', ['employee' => $employee]) }}"
+                                                                action="{{ route('employee.destroy', ['employee' => $user]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -79,9 +86,9 @@
                                                                 </button>
                                                             </form>
                                                         </td>
-                                                        @include('Employees.modal.edit')
                                                     </tr>
                                                 @endforeach
+                                                @include('Employees.modal.edit')
                                             </tbody>
                                         </table>
                                     </div>
@@ -161,7 +168,6 @@
 
         table.on('click', '.remove', function(e) {
             alter('aaaaa');
-
         });
         $('.card .material-datatables label').addClass('form-group');
     });

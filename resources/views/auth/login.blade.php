@@ -11,6 +11,41 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-primary navbar-transparent navbar-absolute">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href=" # ">Private Manager</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{ route('home') }}">
+                            <i class="material-icons">dashboard</i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="  ">
+                        <a href="{{ route('register') }}">
+                            <i class="material-icons">person_add</i>
+                            Register
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ route('login') }}">
+                            <i class="material-icons">fingerprint</i> Login
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="wrapper wrapper-full-page">
         <div class="full-page login-page" filter-color="black" data-image="../../assets/img/login.jpeg">
             <div class="content">
@@ -69,14 +104,12 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" name="remember"
                                                         id="remember" {{ old('remember') ? 'checked' : '' }}>
-
                                                     <label class="form-check-label" for="remember">
                                                         {{ __('Remember Me') }}
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="footer text-center">
                                         <button type="submit"

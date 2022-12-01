@@ -39,6 +39,7 @@
                             <span class="material-input"></span>
                         </div>
                     </div>
+
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">west</i>
@@ -54,6 +55,17 @@
                         <input name="employee_id" type="hidden">
                         <input class="form-control" name="machine_id" id="machine" type="hidden">
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">description</i>
+                        </span>
+                        <div class="form-group">
+                            <strong>{{ __('Giờ KM + Tên') }}:</strong>
+                            <input class="form-control" name="note" id="note" type="text">
+                            <span class="material-input"></span>
+                        </div>
+                    </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -67,7 +79,7 @@
     $('#createForm').on('submit', function() {
         document.createForm.store_id.value = $(".store.selectpicker").val()
         document.createForm.date.value = $("#date").val()
-        document.createForm.employee_id.value = "3"
+        document.createForm.employee_id.value = {{ Auth::user()->employee->id ?? 'null' }}
         document.createForm.machine_id.value = $("#machine_sl").val()
         return true;
     });

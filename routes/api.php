@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->prefix('')->group(function () {
+    Route::get('/edit/{employee}', [EmployeeController::class, 'edit'])->name('edit');
 });

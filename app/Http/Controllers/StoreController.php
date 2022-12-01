@@ -24,8 +24,7 @@ class StoreController extends Controller
     }
     public function index()
     {
-        $stores = $this->query()->get();
-
+        $stores = $this->model->get();
         return view('Stores.index', [
             'stores' => $stores,
         ]);

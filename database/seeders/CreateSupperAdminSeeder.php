@@ -20,12 +20,12 @@ class CreateSupperAdminSeeder extends Seeder
     {
 
         $user = User::create([
-            'name' => 'Anh Hiến',
-            'email' => 'anhhienbadao@gmail.com',
+            'name' => 'AdminAdmin',
+            'email' => 'root@app.com',
             'password' => bcrypt('12345678'),
         ]);
         //$role = Role::create(['name' => 'Admin']);
-        $role = Role::findByName('Admin');
+        $role = Role::findByName('SupperAdmin');
         //$permissions = Permission::pluck('id','id')->all();
         //$role->syncPermissions($permissions);
         $permissions = DB::table('permissions')->where('name', 'LIKE', "all")->pluck('id', 'id')->all();

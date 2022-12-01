@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->integer('entry_point');
             $table->integer('exit_point');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->date('updated_at');
             $table->date('created_at');
-            $table->foreignId('employee_id')
+            $table->foreignId('employee_id')->nullable()
                 ->constrained()
-                ->cascadeOnDelete()->cascadeOnUpdate();
+                ->nullOnDelete();
             $table->foreignId('machine_id')
                 ->constrained()
                 ->cascadeOnDelete()->cascadeOnUpdate();

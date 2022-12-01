@@ -34,7 +34,7 @@ class PermissionMiddleware
             $permissions = array($permission);
         }
         // nếu có toàn quyền
-        if (Auth::user()->can('all')) {
+        if (Auth::user()->can('SuperAdmin')) {
             return  $next($request);
         }
         foreach ($permissions as $permission) {
