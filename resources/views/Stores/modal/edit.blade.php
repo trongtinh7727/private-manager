@@ -58,12 +58,10 @@
         var url = "stores/edit";
         var store = $(this).val();
         var action = "{{ route('store.update', ['store' => '1']) }}"
-
         $.ajax({
             type: 'get',
             url: url + '/' + store,
             success: function(data) {
-                //success data
                 console.log(data);
                 $('#id').val(data.id);
                 $('#s_address').val(data.address);

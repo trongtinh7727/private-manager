@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('entry_point');
             $table->integer('exit_point');
             $table->text('note')->nullable();
+            $table->date('date');
             $table->date('updated_at');
             $table->date('created_at');
             $table->foreignId('employee_id')->nullable()

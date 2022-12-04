@@ -104,7 +104,7 @@ class EmployeeController extends Controller
     public function edit($employee)
     {
         $user = User::query()->where('id', $employee)->first();
-        dd($user->getAttributes());
+        // dd($user->getAttributes());
         return $user->getAttributes();
     }
 

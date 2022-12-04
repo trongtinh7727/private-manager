@@ -37,36 +37,49 @@ class DetailController extends Controller
 
         $store = Store::query()->where('id', $request->store)->first();
         $date = $request->date;
-
         $machines = $store->machines;
         $response = '';
         $id = 1;
+        $total = 0;
         foreach ($machines as $machine) {
-            $Detail = detail::query()->where('machine_id',  $machine->id)->where('created_at', $date)->first();
+            $Detail = detail::query()->where('machine_id',  $machine->id)->where('date', $date)->first();
             if ($Detail == null) {
                 continue;
             }
             $response .= '<tr>
                     <td>' . $id . '</td>
-                    <td>' . $machine->id . '</td>
-                    <td>' . $Detail->entry_point . '</td>
-                    <td>' . $Detail->exit_point . '</td>
-                    <td>' . $Detail->new_profit() . '</td>
-                    <td>' . $Detail->old_profit() . '</td>
-                    <td>' . $Detail->sumOf() . '</td>
+                    <td>' . $machine->name . '</td>
+                    <td class="text-success">' . $Detail->entry_point . '</td>
+                    <td class="text-danger">' . $Detail->exit_point . '</td>
+                    <td >' . $Detail->new_profit() . '</td>
+                    <td >' . $Detail->old_profit() . '</td>
+                    <td >' . $Detail->sumOf() . '</td>
                     <td>' . $Detail->note . '</td>
                     <td class="td-actions text-right">
-                        <button type="button" rel="tooltip" class="btn btn-success btn-round" data-original-title="" title="">
+                        <button data-toggle="modal" value="' . $Detail->id . '"  data-target="#ModalEdit" type="button" rel="tooltip" class="btn btn-success btn-round open_modal" data-original-title="" title="">
                             <i class="material-icons">edit</i>
                         </button>
-                        <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="">
+                        <button type="button" rel="tooltip" value="' . $Detail->id . '" class="btn btn-danger btn-round delete_e" data-original-title="" title="">
                             <i class="material-icons">close</i>
                         </button>
                     </td>
                     </tr>';
-            // $prev = $Detail;
             $id += 1;
+            $total += $Detail->sumOf();
         }
+        $response .=
+            '<tr>
+                    <td class="font-weight-bold">' . "Tổng" . '</td>
+                    <td>'  . '</td>
+                    <td>'  . '</td>
+                    <td>'  . '</td>
+                    <td>'  . '</td>
+                    <td>'  . '</td>
+                    <td class="text-success font-weight-bold">' . $total . '</td>
+                    <td>' . '</td>
+                    <td class="td-actions text-right">
+                    </td>
+                    </tr>';
         return Response($response);
     }
 
@@ -113,7 +126,7 @@ class DetailController extends Controller
      */
     public function edit(detail $detail)
     {
-        //
+        return $detail->getAttributes();
     }
 
     /**
@@ -123,9 +136,14 @@ class DetailController extends Controller
      * @param  \App\Models\detail  $detail
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatedetailRequest $request, detail $detail)
+    public function update(Request $request, detail $detail)
     {
-        //
+        $keys =  ['_token', '_method', 'machine_id'];
+        // dd($request->all());
+        $detail->update(
+            $request->except($keys)
+        );
+        return redirect(route('detail.index'));
     }
 
     /**

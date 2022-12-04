@@ -83,6 +83,7 @@
                                                 </a>
                                             </div>
                                             @include('Details.modal.create')
+                                            @include('Details.modal.edit')
                                         </div>
                                         <table class="table">
                                             <thead>
@@ -99,7 +100,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -124,14 +124,11 @@
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
     $('#search').on('click', function() {
-        // document.createForm.store.value = $(".store.selectpicker").val()
-        $value = "tinh";
         $.ajax({
             type: 'post',
             url: '{{ route('detail.getdetails') }}',
             data: {
                 '_token': CSRF_TOKEN,
-                'date': $value,
                 'store': $(".store.selectpicker").val(),
                 'date': $("#date").val()
             },
@@ -140,6 +137,20 @@
             }
         });
     })
+    $(document).on('click', '.delete_e', function() {
+        var detail = $(this).val();
+        var action = "{{ route('detail.destroy', ['detail' => '1']) }}"
+        $.ajax({
+            type: 'post',
+            url: action.substring(0, action.length - 1) + detail,
+            data: {
+                '_token': CSRF_TOKEN,
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    });
 </script>
 
 </html>

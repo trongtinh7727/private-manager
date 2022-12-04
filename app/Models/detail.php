@@ -16,7 +16,7 @@ class detail extends Model
         'entry_point',
         'note',
         'exit_point',
-        'created_at'
+        'date'
     ];
     /**
      * Get the user's first name.
@@ -30,7 +30,7 @@ class detail extends Model
 
     public function old_profit()
     {
-        $Detail = detail::query()->where('machine_id',  $this->machine->id)->where('created_at', Carbon::create($this->created_at)->subDays(1))->first();
+        $Detail = detail::query()->where('machine_id',  $this->machine->id)->where('date', Carbon::create($this->created_at)->subDays(1))->first();
         if ($Detail != null) {
             return $Detail->new_profit();
         }
