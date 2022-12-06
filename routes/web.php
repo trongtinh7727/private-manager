@@ -63,6 +63,7 @@ Route::middleware(['role:User|Admin|SupperAdmin'])->prefix('')->group(function (
         Route::post('/destroy/', [DetailController::class, 'destroy'])->name('destroy');
         Route::get('/edit/{detail}', [DetailController::class, 'edit'])->name('edit');
         Route::put('/update/{detail}', [DetailController::class, 'update'])->name('update');
+        Route::post('export/', [DetailController::class, 'export'])->name('export');
     });
     Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 });

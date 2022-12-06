@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Exports\DetailExport;
+
 use App\Models\detail;
 use App\Http\Requests\StoredetailRequest;
 use App\Http\Requests\UpdatedetailRequest;
 use App\Models\machine;
 use App\Models\Store;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DetailController extends Controller
 {
@@ -160,5 +164,29 @@ class DetailController extends Controller
         $detail = detail::find($request->detail_id);
         $detail->delete();
         return redirect(route('detail.index'));
+    }
+    public function export(Request $request)
+    {
+        $store = Store::query()->where('id', $request->store)->first();
+        $date = $request->date;
+        $machines = $store->machines;
+        $response = array();
+        $id = 1;
+        $total = 0;
+        foreach ($machines as $machine) {
+            $Detail = detail::query()->where('machine_id',  $machine->id)->where('date', $date)->first();
+            if ($Detail == null) {
+                continue;
+            }
+            $row = array(
+                $id, $machine->name, $Detail->entry_point, $Detail->exit_point,
+                $Detail->new_profit(), $Detail->old_profit(), $Detail->sumOf(), $Detail->note
+            );
+            $response[] = $row;
+            $id += 1;
+            $total += $Detail->sumOf();
+        }
+        $export = new DetailExport($response);
+        return Excel::download($export, 'detail.xlsx');
     }
 }

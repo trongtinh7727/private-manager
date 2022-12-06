@@ -81,6 +81,17 @@
                                                         Thêm
                                                     </button>
                                                 </a>
+                                                <form action="{{ route('detail.export') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="store" id="ex_store">
+                                                    <input type="hidden" name="date" id="ex_date">
+                                                    <button type="submit" class="btn btn-success export">
+                                                        <span class="btn-label">
+                                                            <i class="material-icons">add</i>
+                                                        </span>
+                                                        Xuất File Excel
+                                                    </button>
+                                                </form>
                                             </div>
                                             @include('Details.modal.create')
                                             @include('Details.modal.edit')
@@ -142,6 +153,11 @@
         var detail = $(this).val();
         $('#detail_id').val(detail)
         $('#deleteModal').modal('show')
+    });
+    $(document).on('click', '.export', function(e) {
+        $('#ex_store').val($(".store.selectpicker").val());
+        $('#ex_date').val($("#date").val());
+        return true;
     });
 </script>
 
