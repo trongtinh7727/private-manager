@@ -118,11 +118,11 @@
     </div>
 </body>
 @include('Layout.footer')
+@include('Details.modal.delete')
 <script type="text/javascript">
     document.getElementById("detail").classList.add("active");
     demo.initFormExtendedDatetimepickers()
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
     $('#search').on('click', function() {
         $.ajax({
             type: 'post',
@@ -137,19 +137,11 @@
             }
         });
     })
-    $(document).on('click', '.delete_e', function() {
+    $(document).on('click', '.delete_e', function(e) {
+        e.preventDefault();
         var detail = $(this).val();
-        var action = "{{ route('detail.destroy', ['detail' => '1']) }}"
-        $.ajax({
-            type: 'post',
-            url: action.substring(0, action.length - 1) + detail,
-            data: {
-                '_token': CSRF_TOKEN,
-            },
-            success: function(data) {
-                console.log(data);
-            }
-        });
+        $('#detail_id').val(detail)
+        $('#deleteModal').modal('show')
     });
 </script>
 

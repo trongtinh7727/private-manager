@@ -76,19 +76,14 @@
                                                                 value="{{ $user->id }}"
                                                                 data-target="#ModalEdit{{ $i++ }}"><i
                                                                     class="material-icons">dvr</i></button>
-                                                            <form style="display: inline"
-                                                                action="{{ route('employee.destroy', ['employee' => $user]) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button href=""
-                                                                    class="btn btn-simple btn-danger btn-icon remove">
-                                                                    <i class="material-icons">close</i>
-                                                                </button>
-                                                            </form>
+                                                            <button href="" value="{{ $user->id }}"
+                                                                class="btn btn-simple btn-danger btn-icon remove delete_e">
+                                                                <i class="material-icons">close</i>
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 @endforeach
+                                                @include('Employees.modal.delete')
                                                 @include('Employees.modal.edit')
                                             </tbody>
                                         </table>
@@ -171,6 +166,12 @@
             alter('aaaaa');
         });
         $('.card .material-datatables label').addClass('form-group');
+    });
+    $(document).on('click', '.delete_e', function(e) {
+        e.preventDefault();
+        var employee = $(this).val();
+        $('#employee_id').val(employee)
+        $('#deleteModal').modal('show')
     });
 </script>
 

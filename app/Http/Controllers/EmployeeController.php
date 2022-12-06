@@ -159,9 +159,13 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy($user)
     {
-        $employee->delete();
+        $user = User::find($user);
+        $employee = $user->employee;
+        if (isset($employee))
+            $employee->delete();
+        $user->delete();
         return redirect(route('employee.index'));
     }
 }

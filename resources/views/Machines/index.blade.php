@@ -69,22 +69,17 @@
                                                                 value="{{ $machine->id }}">
                                                                 <i class="material-icons">dvr</i>
                                                             </button>
-                                                            <form style="display: inline"
-                                                                action="{{ route('machine.destroy', [$machine]) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button href=""
-                                                                    class="btn btn-simple btn-danger btn-icon remove">
-                                                                    <i class="material-icons">close</i>
-                                                                </button>
-                                                            </form>
+                                                            <button href="" value="{{ $machine->id }}"
+                                                                class="btn btn-simple btn-danger btn-icon delete_e">
+                                                                <i class="material-icons">close</i>
+                                                            </button>
                                                         </td>
                                                         @include('Machines.modal.edit')
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                        @include('Machines.modal.delete')
                                     </div>
                                 </div>
                                 <!-- end content-->
@@ -159,12 +154,13 @@
         var table = $('#datatables').DataTable();
         //Like record
 
-        table.on('click', '.remove', function(e) {
-            alter('aaaaa');
-
-        });
-
         $('.card .material-datatables label').addClass('form-group');
+    });
+    $(document).on('click', '.delete_e', function(e) {
+        e.preventDefault();
+        var machine = $(this).val();
+        $('#machine_id').val(machine)
+        $('#deleteModal').modal('show')
     });
 </script>
 

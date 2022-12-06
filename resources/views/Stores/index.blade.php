@@ -67,22 +67,17 @@
                                                                 class="btn btn-simple btn-warning btn-icon edit open_modal"
                                                                 value="{{ $store->id }}"><i
                                                                     class="material-icons">dvr</i></button>
-                                                            <form style="display: inline"
-                                                                action="{{ route('store.destroy', $store) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button href=""
-                                                                    class="btn btn-simple btn-danger btn-icon remove">
-                                                                    <i class="material-icons">close</i>
-                                                                </button>
-                                                            </form>
+                                                            <button href=""
+                                                                class="btn btn-simple btn-danger btn-icon remove">
+                                                                <i class="material-icons">close</i>
+                                                            </button>
                                                         </td>
                                                         @include('Stores.modal.edit')
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                        @include('Stores.modal.delete')
                                     </div>
                                 </div>
                                 <!-- end content-->
@@ -158,7 +153,10 @@
         //Like record
 
         table.on('click', '.remove', function(e) {
-            alter('aaaaa');
+            e.preventDefault();
+            var machine = $(this).val();
+            $('#machine_id').val(machine)
+            $('#deleteModal').modal('show')
 
         });
 

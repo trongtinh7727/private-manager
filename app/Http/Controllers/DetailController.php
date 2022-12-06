@@ -59,7 +59,10 @@ class DetailController extends Controller
                         <button data-toggle="modal" value="' . $Detail->id . '"  data-target="#ModalEdit" type="button" rel="tooltip" class="btn btn-success btn-round open_modal" data-original-title="" title="">
                             <i class="material-icons">edit</i>
                         </button>
-                        <button type="button" rel="tooltip" value="' . $Detail->id . '" class="btn btn-danger btn-round delete_e" data-original-title="" title="">
+                      
+                        <button data-toggle="confirmation" 
+                        data-btn-ok-label="Delete" data-btn-ok-icon="fa fa-remove"
+                        type="button" rel="tooltip" value="' . $Detail->id . '" class="btn btn-danger btn-round delete_e" >
                             <i class="material-icons">close</i>
                         </button>
                     </td>
@@ -152,8 +155,10 @@ class DetailController extends Controller
      * @param  \App\Models\detail  $detail
      * @return \Illuminate\Http\Response
      */
-    public function destroy(detail $detail)
+    public function destroy(Request $request)
     {
-        //
+        $detail = detail::find($request->detail_id);
+        $detail->delete();
+        return redirect(route('detail.index'));
     }
 }

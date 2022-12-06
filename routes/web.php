@@ -60,7 +60,7 @@ Route::middleware(['role:User|Admin|SupperAdmin'])->prefix('')->group(function (
         Route::post('/create', [DetailController::class, 'store'])->name('store');
         // TODO: get Details
         Route::post('/getdetails', [DetailController::class, 'getDetail'])->name('getdetails');
-        Route::delete('/destroy/{detail}', [DetailController::class, 'destroy'])->name('destroy');
+        Route::post('/destroy/', [DetailController::class, 'destroy'])->name('destroy');
         Route::get('/edit/{detail}', [DetailController::class, 'edit'])->name('edit');
         Route::put('/update/{detail}', [DetailController::class, 'update'])->name('update');
     });
