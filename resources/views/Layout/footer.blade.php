@@ -41,3 +41,4 @@
 <script src="../../assets/js/material-dashboard.js?v=1.2.1"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="../../assets/js/demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

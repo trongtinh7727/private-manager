@@ -11,7 +11,7 @@ class detail extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'employee_id',
+        'user_id',
         'machine_id',
         'entry_point',
         'note',
@@ -45,6 +45,10 @@ class detail extends Model
     public function machine()
     {
         return $this->belongsTo(machine::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(user::class);
     }
 
     public function store()

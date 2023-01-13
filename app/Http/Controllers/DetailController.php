@@ -38,7 +38,6 @@ class DetailController extends Controller
     }
     public function getDetail(Request $request)
     {
-
         $store = Store::query()->where('id', $request->store)->first();
         $date = $request->date;
         $machines = $store->machines;
@@ -59,11 +58,17 @@ class DetailController extends Controller
                     <td >' . $Detail->old_profit() . '</td>
                     <td >' . $Detail->sumOf() . '</td>
                     <td>' . $Detail->note . '</td>
+                    <td>
+                        <ul class="text-nowrap">
+                            <li> Nhân viên:' . $Detail->user->name . '</li>
+                            <li>updated_at: ' . date_format($Detail->updated_at, "d/m/Y")  . '</li>
+                            <li>created_at:' . date_format($Detail->created_at, "d/m/Y") . '</li>
+                        </ul>
+                    </td>
                     <td class="td-actions text-right">
                         <button data-toggle="modal" value="' . $Detail->id . '"  data-target="#ModalEdit" type="button" rel="tooltip" class="btn btn-success btn-round open_modal" data-original-title="" title="">
                             <i class="material-icons">edit</i>
                         </button>
-                      
                         <button data-toggle="confirmation" 
                         data-btn-ok-label="Delete" data-btn-ok-icon="fa fa-remove"
                         type="button" rel="tooltip" value="' . $Detail->id . '" class="btn btn-danger btn-round delete_e" >
@@ -84,10 +89,30 @@ class DetailController extends Controller
                     <td>'  . '</td>
                     <td class="text-success font-weight-bold">' . $total . '</td>
                     <td>' . '</td>
+                    <td>' . '</td>
                     <td class="td-actions text-right">
                     </td>
                     </tr>';
-        return Response($response);
+        $labels = [];
+        $datasets = [];
+
+        $machines = $store->machines;
+        foreach ($machines as $machine) {
+            $label = $machine->name;
+            $datas = [];
+            $labels = [];
+            $details = $machine->details;
+            foreach ($details as $detail) {
+                $datas[] = $detail->entry_point;
+                $labels[] = $detail->date;
+            }
+            $datasets[] = [$label, $datas];
+        }
+         return Response([
+            'datasets' => $datasets,
+            'labels' => $labels,
+            'trans' => $response
+        ]);
     }
 
     /**
@@ -111,7 +136,7 @@ class DetailController extends Controller
         // dd($request->all());
         $keys =  ['_token'];
         detail::create($request->except($keys));
-        return redirect()->route('detail.index');
+        return redirect()->route('detail.index')->with('message', 'Lưu thành công');
     }
 
     /**
@@ -150,7 +175,7 @@ class DetailController extends Controller
         $detail->update(
             $request->except($keys)
         );
-        return redirect(route('detail.index'));
+        return redirect(route('detail.index'))->with('message', 'Lưu thành công');
     }
 
     /**
@@ -163,7 +188,7 @@ class DetailController extends Controller
     {
         $detail = detail::find($request->detail_id);
         $detail->delete();
-        return redirect(route('detail.index'));
+        return redirect(route('detail.index'))->with('message', 'Xóa thành công');
     }
     public function export(Request $request)
     {

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text("name");
             $table->text("email");
             $table->text("password");
+            $table->timestamp("email_verified_at")->nullable();
             $table->text("remember_token")->nullable();
             $table->timestamps();
         });

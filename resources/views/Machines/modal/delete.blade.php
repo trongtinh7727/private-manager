@@ -1,7 +1,7 @@
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form style="display: inline" action="{{ route('machine.destroy', ['machine' => $machine]) }}"
+            <form style="display: inline" action="{{ route('machine.destroy', ['machine' => $machine ?? '0']) }}"
                 method="POST">
                 <div class="modal-header">
                     @csrf

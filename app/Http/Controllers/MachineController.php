@@ -56,7 +56,7 @@ class MachineController extends Controller
         $machine = new machine();
         $machine->fill($request->except($keys));
         $machine->save();
-        return redirect()->route('machine.index');
+        return redirect()->route('machine.index')->with('message', 'Lưu thành công');
     }
 
     /**
@@ -95,7 +95,7 @@ class MachineController extends Controller
         $machine->update(
             $request->except($keys)
         );
-        return redirect(route('machine.index'));
+        return redirect(route('machine.index'))->with('message', 'Lưu thành công');
     }
 
     /**
@@ -107,6 +107,6 @@ class MachineController extends Controller
     public function destroy(machine $machine)
     {
         $machine->delete();
-        return redirect(route('machine.index'));
+        return redirect(route('machine.index'))->with('message', 'Xóa thành công');
     }
 }

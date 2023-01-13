@@ -96,7 +96,13 @@
                                             @include('Details.modal.create')
                                             @include('Details.modal.edit')
                                         </div>
+
                                         <table class="table">
+                                            @if (session()->has('message'))
+                                                <div class="alert alert-success" role="alert">
+                                                    {{ session()->get('message') }}
+                                                </div>
+                                            @endif
                                             <thead>
                                                 <tr>
                                                     <th class="text-center">#</th>
@@ -107,6 +113,9 @@
                                                     <th>Điểm lời cũ</th>
                                                     <th>TC Thành Tiền</th>
                                                     <th>Giờ KM + Ten</th>
+                                                    @hasrole(['SupperAdmin', 'Admin'])
+                                                        <th class="text-center">Log</th>
+                                                    @endhasrole
                                                     <th class="text-right">Actions</th>
                                                 </tr>
                                             </thead>
@@ -118,10 +127,23 @@
                             </div>
                             <!--  end card  -->
                         </div>
-
                         <!-- end col-md-12 -->
+                        
                     </div>
                     <!-- end row -->
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-header card-header-icon" data-background-color="blue">
+                                <i class="material-icons">timeline</i>
+                            </div>
+                            <div class="card-content">
+                                <h4 class="card-title"> Phân phối điểm vào
+                                    <small> - Rounded</small>
+                                </h4>
+                            </div>
+                            <canvas id="colouredBarsChart" class="ct-chart"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -144,7 +166,33 @@
                 'date': $("#date").val()
             },
             success: function(data) {
-                $('tbody').html(data);
+                 console.log(data);
+                $('tbody').html(data['trans']);
+                datasets = data['datasets'];
+                labels = data['labels'];
+                const ctx = document.getElementById('colouredBarsChart');
+                data = [];
+                datasets.forEach(dataset => {
+                    data.push({
+                        label: dataset[0],
+                        data: dataset[1],
+                        borderWidth: 1
+                    })
+                });
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: data,
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
             }
         });
     })

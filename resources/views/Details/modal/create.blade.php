@@ -52,7 +52,7 @@
                         </div>
                         <input id="store_id" name="store_id" type="hidden">
                         <input id="date" name="date" type="hidden">
-                        <input name="employee_id" type="hidden">
+                        <input name="user_id" type="hidden">
                         <input class="form-control" name="machine_id" id="machine" type="hidden">
                     </div>
                     <div class="input-group">
@@ -79,7 +79,7 @@
     $('#createForm').on('submit', function() {
         document.createForm.store_id.value = $(".store.selectpicker").val()
         document.createForm.date.value = $("#date").val()
-        document.createForm.employee_id.value = {{ Auth::user()->employee->id ?? 'null' }}
+        document.createForm.user_id.value = {{ Auth::user()->id }}
         document.createForm.machine_id.value = $("#machine_sl").val()
         return true;
     });

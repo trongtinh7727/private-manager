@@ -82,7 +82,7 @@ class EmployeeController extends Controller
     {
         $keys =  ['_token', 'password_confirmation', 'finish'];
         Employee::create($request->except($keys));
-        return redirect()->route('employee.index');
+        return redirect()->route('employee.index')->with('message', 'Lưu thành công');
     }
     /**
      * Display the specified resource.
@@ -150,7 +150,7 @@ class EmployeeController extends Controller
             $user->roles()->detach();
             $user->assignRole(['3']);
         }
-        return redirect(route('employee.index'));
+        return redirect(route('employee.index'))->with('message', 'Lưu thành công');
     }
 
     /**
@@ -166,6 +166,6 @@ class EmployeeController extends Controller
         if (isset($employee))
             $employee->delete();
         $user->delete();
-        return redirect(route('employee.index'));
+        return redirect(route('employee.index'))->with('message', 'Xóa thành công');
     }
 }

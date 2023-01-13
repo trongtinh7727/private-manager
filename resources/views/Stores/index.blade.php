@@ -38,6 +38,11 @@
                                         @include('Stores.modal.create')
                                     </div>
                                     <div class="material-datatables">
+                                        @if (session()->has('message'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session()->get('message') }}
+                                            </div>
+                                        @endif
                                         <table id="datatables" class="table table-striped table-no-bordered table-hover"
                                             cellspacing="0" width="100%" style="width:100%">
                                             <thead>

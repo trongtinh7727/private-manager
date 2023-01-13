@@ -52,7 +52,7 @@ class StoreController extends Controller
         $Store = new Store();
         $Store->fill($request->except($keys));
         $Store->save();
-        return redirect()->route('store.index');
+        return redirect()->route('store.index')->with('message', 'Lưu thành công');
     }
 
     /**
@@ -92,7 +92,7 @@ class StoreController extends Controller
                 '_method'
             )
         );
-        return redirect(route('store.index'));
+        return redirect(route('store.index'))->with('message', 'Lưu thành công');
     }
 
     /**
@@ -104,6 +104,6 @@ class StoreController extends Controller
     public function destroy(Store $store)
     {
         $store->delete();
-        return redirect(route('store.index'));
+        return redirect(route('store.index'))->with('message', 'Xóa thành công');
     }
 }
